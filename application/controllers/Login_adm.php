@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller
+class Login_adm extends CI_Controller
 {
     public function __construct()
     {
@@ -31,20 +31,20 @@ class Login extends CI_Controller
 
         if ($user) {
             $data = [
-                'status_login_siswa' => 'sukses_siswa',
+                'status_login_adm' => 'sukses_adm',
                 'username' => $user['username'],
             ];
             $this->session->set_userdata($data);
             redirect('admin');
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Username atau Password anda salah</div>');
-            redirect('Login');
+            redirect('Login_adm');
         }
     }
 
     function logout()
     {
         $this->session->sess_destroy();
-        redirect('Login');
+        redirect('Login_adm');
     }
 }

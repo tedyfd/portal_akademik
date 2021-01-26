@@ -41,7 +41,7 @@
                                 <small>Login</small>
                             </div>
                             <?= $this->session->flashdata('message') ?>
-                            <form method="POST" action="<?= base_url('Login') ?>">
+                            <form method="POST" action="<?= base_url('login_adm') ?>">
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">

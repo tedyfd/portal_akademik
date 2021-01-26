@@ -6,12 +6,13 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('status_login') != "sukses_adm") {
-            redirect('login');
+        if ($this->session->userdata('status_login_adm') != "sukses_adm") {
+            redirect('login_adm');
         } else {
             $this->load->library('csvimport');
             $this->load->model('admin/Model_raport');
             $this->load->model('admin/Model_import_csv');
+            $this->load->model('admin/Model_admin');
         }
     }
 
@@ -276,5 +277,61 @@ class Admin extends CI_Controller
 
     public function matpel()
     {
+    }
+
+    public function pengumuman()
+    {
+        $data['title'] = 'Pengumuman';
+
+        //model
+        $data['list_pengumuman'] = $this->Model_admin->list_pengumuman();
+
+        //name 
+        $data['page'] = 'Pengumuman';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function pengumuman_del($id)
+    {
+    }
+
+    public function pengumuman_add()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('title', 'Title', 'required|trim');
+        $this->form_validation->set_rules('content', 'Content', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Pengumuman';
+
+            // //model
+
+            //name 
+            $data['page'] = 'Pengumuman_add';
+            $data['profile'] = 'smp';
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_pengumuman_add();
+        }
+    }
+
+    private function _pengumuman_add()
+    {
+        $title = $this->input->post('title');
+        $content = $this->input->post('content');
+        $link = str_replace(' ', '', $this->input->post('title'));
+
+        $data = array(
+            'title' => $title,
+            'pengumuman' => $content,
+            'link' => $link,
+            'created' => '',
+        );
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        $this->db->insert('pengumuman', $data);
+        redirect('admin/pengumuman');
     }
 }

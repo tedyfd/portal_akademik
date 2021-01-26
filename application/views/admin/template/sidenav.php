@@ -51,7 +51,7 @@
                             ?>
                         <?php foreach ($sub as $s) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo (base_url('admin/') . $s['url']) ?>" target="_blank">
+                            <a class="nav-link" href="<?php echo (base_url('admin/') . $s['url']) ?>" target="">
                                 <i class="<?= $s['icon'] ?>"></i>
                                 <span class="nav-link-text"><?= $s['sub_menu'] ?></span>
                             </a>

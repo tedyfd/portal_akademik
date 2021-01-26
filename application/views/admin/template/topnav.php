@@ -46,7 +46,7 @@
                                 </a>
 
                                 <div class="dropdown-divider"></div>
-                                <a href="<?= base_url('Login/logout') ?>" class="dropdown-item">
+                                <a href="<?= base_url('Login_adm/logout') ?>" class="dropdown-item">
                                     <i class="ni ni-user-run"></i>
                                     <span>Logout</span>
                                 </a>

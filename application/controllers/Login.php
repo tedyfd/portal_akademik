@@ -16,7 +16,7 @@ class Login extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = "SMPS Maitreyawira";
-            $this->load->view('login/index', $data);
+            $this->load->view('login/siswa', $data);
         } else {
             $this->_login();
         }
@@ -27,15 +27,15 @@ class Login extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $user = $this->db->get_where('admin', ['username' => $username, 'password' => $password])->row_array();
+        $user = $this->db->get_where('siswa', ['nis' => $username, 'password' => $password])->row_array();
 
         if ($user) {
             $data = [
                 'status_login_siswa' => 'sukses_siswa',
-                'username' => $user['username'],
+                'username' => $user['nis'],
             ];
             $this->session->set_userdata($data);
-            redirect('admin');
+            redirect('siswa');
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Username atau Password anda salah</div>');
             redirect('Login');

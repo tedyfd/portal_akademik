@@ -24,14 +24,14 @@
 
 <body>
     <div id="flash-data" data-flashdata="<?= $this->session->flashdata('message') ?>"></div>
-    <?php $this->load->view('admin/template/sidenav') ?>
+    <?php $this->load->view('siswa/template/sidenav') ?>
     <!-- Main content -->
     <div class="main-content" id="panel">
 
-        <?php $this->load->view('admin/template/topnav') ?>
+        <?php $this->load->view('siswa/template/topnav') ?>
 
         <!-- Header -->
-        <?php $this->load->view('admin/template/header') ?>
+        <?php $this->load->view('siswa/template/header') ?>
 
         <!-- Page content -->
         <div class="container-fluid mt-2">
@@ -39,16 +39,11 @@
             <!-- content -->
             <?php
 
-            if ($page == 'Raport (semua jenis)') {
-                $this->load->view('admin/content/dashboard');
-            } else if ($page == 'Mid Gasal') {
-                $this->load->view('admin/content/table_mid');
-            } else if ($page == 'Data Siswa') {
-                $this->load->view('admin/content/table_siswa');
+            if ($page == 'Dashboard') {
+                $this->load->view('siswa/content/dashboard');
             } else if ($page == 'Pengumuman') {
-                $this->load->view('admin/content/table_pengumuman');
+                $this->load->view('siswa/content/pengumuman');
             } else if ($page == 'Pengumuman_add') {
-                $this->load->view('admin/content/table_pengumuman_add');
             }
             ?>
 

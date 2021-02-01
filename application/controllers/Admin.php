@@ -295,6 +295,9 @@ class Admin extends CI_Controller
 
     public function pengumuman_del($id)
     {
+        $this->db->delete('pengumuman', array('id' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus!');
+        redirect('admin/pengumuman');
     }
 
     public function pengumuman_add()
@@ -330,8 +333,8 @@ class Admin extends CI_Controller
             'link' => $link,
             'created' => '',
         );
-        $this->session->set_flashdata('message', 'telah ditambahkan');
         $this->db->insert('pengumuman', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
         redirect('admin/pengumuman');
     }
 }

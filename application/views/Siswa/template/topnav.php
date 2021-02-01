@@ -1,4 +1,6 @@
         <!-- Topnav -->
+        <?php $nis = $this->session->userdata('username'); ?>
+        <?php $profile = $this->db->get_where('siswa', array('nis' => $nis))->row_array() ?>
         <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,7 +30,7 @@
                                         <img alt="Image placeholder" src="<?= base_url() ?>assets/img/theme/team-4.jpg">
                                     </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
-                                        <span class="mb-0 text-sm  font-weight-bold"><?= $profile ?></span>
+                                        <span class="mb-0 text-sm  font-weight-bold"><?= $profile['nama'] ?></span>
                                     </div>
                                 </div>
                             </a>

@@ -12,7 +12,7 @@
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
 
                     <?php
-                    $menu_q = "SELECT * FROM menu";
+                    $menu_q = "SELECT * FROM siswa_menu";
                     $menu = $this->db->query($menu_q)->result_array();
                     ?>
                     <?php foreach ($menu as $m) : ?>
@@ -22,12 +22,12 @@
                     <ul class="navbar-nav mb-md-3">
                         <?php
                             $menuid = $m['id'];
-                            $sub_q = "SELECT * FROM sub_menu INNER JOIN menu on sub_menu.menu_id = menu.id WHERE sub_menu.menu_id=$menuid";
+                            $sub_q = "SELECT * FROM siswa_sub_menu INNER JOIN siswa_menu on siswa_sub_menu.menu_id = siswa_menu.id WHERE siswa_sub_menu.menu_id=$menuid";
                             $sub = $this->db->query($sub_q)->result_array();
                             ?>
                         <?php foreach ($sub as $s) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo (base_url('admin/') . $s['url']) ?>" target="">
+                            <a class="nav-link" href="<?php echo (base_url('siswa/') . $s['url']) ?>" target="">
                                 <i class="<?= $s['icon'] ?>"></i>
                                 <span class="nav-link-text"><?= $s['sub_menu'] ?></span>
                             </a>

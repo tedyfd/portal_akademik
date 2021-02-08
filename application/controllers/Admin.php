@@ -156,21 +156,6 @@ class Admin extends CI_Controller
         $this->Model_import_csv->insert_semester($data);
     }
 
-    public function import_siswa()
-    {
-        // $this->db->empty_table('siswa');
-        $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
-        foreach ($file_data as $row) {
-            $data[] = array(
-                'nis' => $row['nis'],
-                'password' => $row['tanggal_lahir'],
-                'nama' => $row['nama'],
-                'nisn' => $row['nisn'],
-            );
-        }
-        $this->Model_import_csv->insert_siswa($data);
-    }
-
     public function raport_mid1()
     {
         $data['title'] = 'Mid Gasal';
@@ -245,6 +230,28 @@ class Admin extends CI_Controller
         $data['modal'] = 'siswa';
 
         $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function import_siswa()
+    {
+        // $this->db->empty_table('siswa');
+        $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
+        foreach ($file_data as $row) {
+            $data[] = array(
+                'nis' => $row['nis'],
+                'password' => $row['tanggal_lahir'],
+                'nama' => $row['nama'],
+                'nisn' => $row['nisn'],
+            );
+        }
+        $this->Model_import_csv->insert_siswa($data);
+    }
+
+    public function delete_siswa($id)
+    {
+        $this->db->delete('siswa', array('id' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus!');
+        redirect('admin/siswa');
     }
 
     public function kkm()
@@ -326,12 +333,13 @@ class Admin extends CI_Controller
         $title = $this->input->post('title');
         $content = $this->input->post('content');
         $link = str_replace(' ', '', $this->input->post('title'));
+        $created = date("d-m-Y");
 
         $data = array(
             'title' => $title,
             'pengumuman' => $content,
             'link' => $link,
-            'created' => '',
+            'created' => $created,
         );
         $this->db->insert('pengumuman', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');

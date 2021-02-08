@@ -13,7 +13,7 @@ $count_kelas = $this->db->query("SELECT count(kelas) AS count FROM kelas")->row_
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url('siswa/') ?>">Dashboards</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><?= $page ?></li>
                         </ol>
                     </nav>

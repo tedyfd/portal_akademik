@@ -43,7 +43,8 @@
                 $this->load->view('siswa/content/dashboard');
             } else if ($page == 'Pengumuman') {
                 $this->load->view('siswa/content/pengumuman');
-            } else if ($page == 'Pengumuman_add') {
+            } else if ($page == 'Detail Pengumuman') {
+                $this->load->view('siswa/content/detail_pengumuman');
             }
             ?>
 
@@ -63,42 +64,6 @@
                     </div>
                 </div>
             </footer>
-        </div>
-    </div>
-
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header ">
-
-
-                    <p class="modal-title font-weight-bold" id="modaltitle"><?= $page ?></p>
-                </div>
-                <div class="modal-body ">
-                    <form action="<?= base_url('admin/import_') ?><?= $modal ?>" method="post"
-                        id="import_csv_<?= $modal ?>" enctype="multipart/form-data">
-                        <label>Select CSV File</label>
-                        <input type="file" name="csv_file" id="csv_file" required accept=".csv" />
-                        <button name="import_csv_<?= $modal ?>" id="import_<?= $modal ?>_btn"
-                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm modalbtn"><i
-                                class="fas fa-upload fa-sm "></i> Import CSV</button>
-                    </form>
-
-                    <p>Contoh file excel untuk mid (xlsx)<a href="<?= base_url('excel') ?>/templates_mid.xlsx">klik</a>
-                    </p>
-                    <p>Contoh file excel untuk mid (csv)<a href="<?= base_url('excel') ?>/templates_mid.csv">klik</a>
-                    </p>
-                    <p>Contoh file excel untuk SEMESTER 1 (xlsx)<a
-                            href="<?= base_url('excel') ?>/templates_semester1.xlsx">klik</a></p>
-                    <p>Contoh file excel untuk SEMESTER 1 (csv)<a
-                            href="<?= base_url('excel') ?>/templates_semester1.csv">klik</a></p>
-                    <p>Contoh file excel untuk list siswa (xlsx)<a
-                            href="<?= base_url('excel') ?>/templates_siswa.xlsx">klik</a></p>
-                    <p>Contoh file excel untuk list siswa (csv)<a
-                            href="<?= base_url('excel') ?>/templates_siswa.csv">klik</a></p>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -126,165 +91,13 @@
 
     <!-- sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-    $(document).ready(function() {
-        $('.modalbtn').on('click', function() {
-            $('#editmodal').modal('show');
-        });
-    });
-    var table = '';
-    // DataTable, untuk Pencarian
-    var table = $('#tabel1').DataTable({
-        initComplete: function() {
-            // Apply the search
-            this.api().columns().every(function() {
-                var that = this;
 
-                $('input', this.footer()).on('keyup change clear', function() {
-                    if (that.search() !== this.value) {
-                        that
-                            .search(this.value)
-                            .draw();
-                    }
-                });
-            });
-        }
-    });
-
-    //untuk tampilkan button export 
-    $('#tabel1').DataTable({
-        destroy: true,
-        dom: 'Bfrtip',
-        buttons: [
-            'pageLength',
-            'excelHtml5',
-            'csvHtml5',
-        ],
-        "lengthMenu": [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ],
-    });
-
-    $('#import_csv_mid').on('submit', function(event) {
-        event.preventDefault();
-        $.ajax({
-            url: "<?php echo base_url(); ?>admin/import_mid",
-            method: "POST",
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function() {
-                $('#import_mid_btn').html('Importing...');
-            },
-            success: function(data) {
-                $('#import_csv_mid')[0].reset();
-                $('#import_mid_btn').attr('disabled', false);
-                $('#import_mid_btn').html('Import Done');
-                alert("Import berhasil!");
-                location.reload();
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Gagal Menyimpan");
-            }
-        })
-    });
-
-    $('#import_csv_semester').on('submit', function(event) {
-        event.preventDefault();
-        $.ajax({
-            url: "<?php echo base_url(); ?>admin/import_semester",
-            method: "POST",
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function() {
-                $('#import_semester_btn').html('Importing...');
-            },
-            success: function(data) {
-                $('#import_csv_semester')[0].reset();
-                $('#import_semester_btn').attr('disabled', false);
-                $('#import_semester_btn').html('Import Done');
-                alert("Import berhasil!");
-                location.reload();
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Gagal menyimpan");
-            }
-        })
-    });
-    $('#import_csv_siswa').on('submit', function(event) {
-        event.preventDefault();
-        $.ajax({
-            url: "<?php echo base_url(); ?>admin/import_siswa",
-            method: "POST",
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function() {
-                $('#import_siswa_btn').html('Importing...');
-            },
-            success: function(data) {
-                $('#import_csv_siswa')[0].reset();
-                $('#import_siswa_btn').attr('disabled', false);
-                $('#import_siswa_btn').html('Import Done');
-                alert("Import berhasil!");
-                location.reloads();
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Gagal menyimpan");
-            }
-        })
-    });
-
-    $('.submit-btn').on('click', function(e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Apakah anda yakin?',
-            text: "Data akan disimpan ke database!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $('#form').submit();
-            }
-        })
-    });
-    </script>
-    <script>
-    const success = $('#flash-data').data('flashdata');
-    if (success) {
-        Swal.fire({
-            title: 'SUCCESS',
-            text: 'Data ' + success,
-            icon: 'success'
-        });
-    }
-
-    $('.delete-btn-conf').on('click', function(e) {
-        e.preventDefault();
-        const href = $(this).attr('href');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.value == true) {
-                document.location.href = href;
-            }
-        })
-    });
-    </script>
+    <?php if ($this->session->userdata('status_login_siswa') == "sukses_siswa") : ?>
+    <script src="<?= base_url('assets/js/siswa.js') ?>"></script>
+    <?php else : ?>
+    <script src="<?= base_url('assets/js/admin.js') ?>"></script>
+    <script src="<?= base_url('assets/js/admin2.js') ?>"></script>
+    <?php endif; ?>
 </body>
 
 </html>

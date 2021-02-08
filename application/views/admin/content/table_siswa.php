@@ -54,9 +54,9 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <a class="dropdown-item delete-btn-conf"
+                                            href="<?= base_url('admin/delete_siswa/') . $m['id'] ?>">Delete</a>
                                     </div>
                                 </div>
                             </td>

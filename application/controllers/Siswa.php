@@ -7,9 +7,9 @@ class Siswa extends CI_Controller
     {
         parent::__construct();
         if ($this->session->userdata('status_login_siswa') != "sukses_siswa") {
-            redirect('login_adm');
+            redirect('login');
         } else {
-            $this->load->model('admin/Model_admin');
+            $this->load->model('siswa/Model_siswa');
         }
     }
 
@@ -29,8 +29,8 @@ class Siswa extends CI_Controller
     {
         $data['title'] = 'Pengumuman';
 
-        // //model
-        $data['list_pengumuman'] = $this->Model_admin->list_pengumuman();
+        //model
+        $data['list_pengumuman'] = $this->Model_siswa->list_pengumuman();
 
         //name 
         $data['page'] = 'Pengumuman';
@@ -38,7 +38,16 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/dashboard/index', $data);
     }
 
-    public function pengumuman_detail()
+    public function pengumuman_detail($id)
     {
+        $data['title'] = 'Pengumuman';
+
+        //model
+        $data['list_pengumuman'] = $this->Model_siswa->detail_pengumuman($id);
+
+        //name 
+        $data['page'] = 'Detail Pengumuman';
+
+        $this->load->view('siswa/dashboard/index', $data);
     }
 }

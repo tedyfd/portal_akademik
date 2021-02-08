@@ -30,4 +30,13 @@ class Model_siswa extends CI_Model
             return $this->db->query($query)->result_array();
         }
     }
+
+    function list_pengumuman()
+    {
+        return $this->db->query('select * from pengumuman order by id desc')->result_array();
+    }
+    function detail_pengumuman($id)
+    {
+        return $this->db->query("select * from pengumuman where id=$id")->row_array();
+    }
 }

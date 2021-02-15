@@ -4,6 +4,29 @@ class Model_admin extends CI_Model
 {
     function list_pengumuman()
     {
-        return $this->db->query('select * from pengumuman order by id desc')->result_array();
+        return $this->db->query('SELECT * FROM pengumuman ORDER BY id DESC')->result_array();
+    }
+
+    function list_kelas()
+    {
+        return $this->db->get('kelas')->result_array();
+    }
+
+    function list_kelas_ta()
+    {
+        $query = "SELECT th_kelas.id_th_kelas, th_ajaran.th_ajaran, kelas.kelas FROM th_kelas
+        INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+        INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas";
+        return $this->db->query($query)->result_array();
+    }
+
+    function list_matpel_ta()
+    {
+        $query = "SELECT th_matpel.id_th_matpel, th_ajaran.th_ajaran, kelas.kelas, matpel.matpel FROM th_matpel
+        INNER JOIN th_kelas on th_matpel.id_th_kelas = th_kelas.id_th_kelas
+        INNER JOIN matpel on th_matpel.id_matpel = matpel.id_matpel
+        INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+        INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas";
+        return $this->db->query($query)->result_array();
     }
 }

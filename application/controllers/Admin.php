@@ -20,7 +20,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Dashboard';
 
-        // //model
+        //model
         $data['mid'] = $this->Model_raport->mid();
 
         //name 
@@ -344,5 +344,86 @@ class Admin extends CI_Controller
         $this->db->insert('pengumuman', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');
         redirect('admin/pengumuman');
+    }
+
+    public function kelas()
+    {
+        $data['title'] = 'Pengumuman';
+
+        //model
+        $data['list_kelas'] = $this->Model_admin->list_kelas();
+
+        //name 
+        $data['page'] = 'Kelas';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function kelas_ta()
+    {
+        $data['title'] = 'Kelas Berdasarkan Tahun Ajaran';
+
+        //model
+        $data['list_kelas_ta'] = $this->Model_admin->list_kelas_ta();
+
+        //name 
+        $data['page'] = 'Kelas Tahun Ajaran';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function kelas_ta_add()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('ta', 'Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Tambah Kelas Tahun Ajaran';
+
+            // //model
+
+            //name 
+            $data['page'] = 'Kelas Tahun Ajaran add';
+            $data['profile'] = 'smp';
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_kelas_ta_add();
+        }
+    }
+
+    private function _kelas_ta_add()
+    {
+        $th = $this->input->post('ta');
+        $kelas = $this->input->post('kelas');
+
+        $data = array(
+            'id_th' => $th,
+            'id_kelas' => $kelas,
+        );
+        $this->db->insert('th_kelas', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/kelas_ta');
+    }
+
+    public function matpel_ta()
+    {
+        $data['title'] = 'Matpel Berdasarkan Kelas TA';
+
+        //model
+        $data['list_matpel_ta'] = $this->Model_admin->list_matpel_ta();
+
+        //name 
+        $data['page'] = 'Matpel Tahun Ajaran';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function matpel_ta_add()
+    {
     }
 }

@@ -3,7 +3,7 @@
         <div class="card">
             <!-- Card header -->
             <div class="card-header border-0">
-                <h3 class="mb-0">Light table</h3>
+                <h3 class="mb-0">Pengumuman</h3>
             </div>
             <!-- modal button -->
             <div class="container mb-md-3">

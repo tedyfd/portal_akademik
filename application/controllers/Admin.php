@@ -384,6 +384,20 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
     }
 
+    public function semester()
+    {
+        $data['title'] = 'Semester';
+
+        //model
+        $data['list_semester'] = $this->Model_admin->list_semester();
+
+        //name 
+        $data['page'] = 'Semester';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
     public function kelas_ta()
     {
         $data['title'] = 'Kelas Berdasarkan Tahun Ajaran';

@@ -22,6 +22,11 @@ class Model_admin extends CI_Model
         return $this->db->get('matpel')->result_array();
     }
 
+    function list_semester()
+    {
+        return $this->db->get('semester')->result_array();
+    }
+
     function list_kelas_ta()
     {
         $query = "SELECT th_kelas.id_th_kelas, th_ajaran.th_ajaran, kelas.kelas FROM th_kelas

@@ -55,6 +55,8 @@
                 $this->load->view('admin/content/table_list_kelas');
             } else if ($page == 'Matpel') {
                 $this->load->view('admin/content/table_list_matpel');
+            } else if ($page == 'Semester') {
+                $this->load->view('admin/content/table_list_semester');
             } else if ($page == 'Kelas Tahun Ajaran') {
                 $this->load->view('admin/content/table_kelas_ta');
             } else if ($page == 'Kelas Tahun Ajaran add') {

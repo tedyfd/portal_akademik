@@ -10,7 +10,12 @@
                     <div class="col col-md-3">
                         <a href="<?= base_url('admin/matpel_ta_add') ?>"
                             class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-upload fa-sm text-white-50"></i> Tambah Pengumuman</a>
+                                class="fas fa-upload fa-sm text-white-50"></i> Tambah Matpel TA</a>
+                    </div>
+                    <div class="col col-md-3">
+                        <a href="<?= base_url('admin/matpel_ta_batch') ?>"
+                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-upload fa-sm text-white-50"></i> Tambah Matpel TA (Batch)</a>
                     </div>
                 </div>
             </div>

@@ -282,10 +282,6 @@ class Admin extends CI_Controller
         echo 'untuk import Mid Genap, Semester 1 dan 2. belum diaktifkan.';
     }
 
-    public function matpel()
-    {
-    }
-
     public function pengumuman()
     {
         $data['title'] = 'Pengumuman';
@@ -346,9 +342,37 @@ class Admin extends CI_Controller
         redirect('admin/pengumuman');
     }
 
+    public function ta()
+    {
+        $data['title'] = 'Tahun Ajaran';
+
+        //model
+        $data['list_ta'] = $this->Model_admin->list_ta();
+
+        //name 
+        $data['page'] = 'Tahun Ajaran';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function matpel()
+    {
+        $data['title'] = 'Mata Pelajaran';
+
+        //model
+        $data['list_matpel'] = $this->Model_admin->list_matpel();
+
+        //name 
+        $data['page'] = 'Matpel';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
     public function kelas()
     {
-        $data['title'] = 'Pengumuman';
+        $data['title'] = 'Kelas';
 
         //model
         $data['list_kelas'] = $this->Model_admin->list_kelas();
@@ -409,6 +433,45 @@ class Admin extends CI_Controller
         redirect('admin/kelas_ta');
     }
 
+    public function kelas_ta_batch()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('ta', 'Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Batch Kelas Tahun Ajaran';
+
+            // //model
+
+            //name 
+            $data['page'] = 'Batch Kelas Tahun Ajaran add';
+            $data['profile'] = 'smp';
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_kelas_ta_batch();
+        }
+    }
+
+    private function _kelas_ta_batch()
+    {
+        $ta = $this->input->post('ta');
+        $kelas = $this->input->post('kelas');
+        $kelas = $this->db->query("SELECT * FROM conf_kelas_th WHERE id = $kelas")->row_array();
+
+        $myString = $kelas['kelas'];
+        $myArray = explode(',', $myString);
+        foreach ($myArray as $row) {
+            $data[] = array(
+                'id_th' => "$ta",
+                'id_kelas' => $row[0],
+            );
+        }
+        $this->db->insert_batch('th_kelas', $data);
+        redirect('admin/kelas_ta');
+    }
+
     public function matpel_ta()
     {
         $data['title'] = 'Matpel Berdasarkan Kelas TA';
@@ -425,5 +488,75 @@ class Admin extends CI_Controller
 
     public function matpel_ta_add()
     {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('ta_kelas', 'Kelas Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('matpel', 'Kelas', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Tambah Matpel Tahun Ajaran';
+
+            // //model
+
+            //name 
+            $data['page'] = 'Matpel Tahun Ajaran add';
+            $data['profile'] = 'smp';
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_matpel_ta_add();
+        }
+    }
+
+    private function _matpel_ta_add()
+    {
+        $th_kelas = $this->input->post('ta_kelas');
+        $matpel = $this->input->post('matpel');
+
+        $data = array(
+            'id_th_kelas' => $th_kelas,
+            'id_matpel' => $matpel,
+        );
+        $this->db->insert('th_matpel', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/matpel_ta');
+    }
+
+    public function matpel_ta_batch()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('kelas', 'Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('matpel', 'Kelas', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Batch Matpel Tahun Ajaran';
+
+            // //model
+
+            //name 
+            $data['page'] = 'Batch Matpel Ta add';
+            $data['profile'] = 'smp';
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_matpel_ta_batch();
+        }
+    }
+
+    private function _matpel_ta_batch()
+    {
+        $kelas = $this->input->post('kelas');
+        $matpel = $this->input->post('matpel');
+        $matpel = $this->db->query("SELECT * FROM conf_matpel_th WHERE id = $matpel")->row_array();
+
+        $myString = $matpel['matpel'];
+        $myArray = explode(',', $myString);
+        foreach ($myArray as $row) {
+            $data[] = array(
+                'id_th_kelas' => "$kelas",
+                'id_matpel' => $row[0],
+            );
+        }
+        $this->db->insert_batch('th_matpel', $data);
+        redirect('admin/matpel_ta');
     }
 }

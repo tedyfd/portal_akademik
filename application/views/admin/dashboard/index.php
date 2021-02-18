@@ -49,14 +49,24 @@
                 $this->load->view('admin/content/table_pengumuman');
             } else if ($page == 'Pengumuman_add') {
                 $this->load->view('admin/content/table_pengumuman_add');
+            } else if ($page == 'Tahun Ajaran') {
+                $this->load->view('admin/content/table_list_ta');
             } else if ($page == 'Kelas') {
                 $this->load->view('admin/content/table_list_kelas');
+            } else if ($page == 'Matpel') {
+                $this->load->view('admin/content/table_list_matpel');
             } else if ($page == 'Kelas Tahun Ajaran') {
                 $this->load->view('admin/content/table_kelas_ta');
             } else if ($page == 'Kelas Tahun Ajaran add') {
                 $this->load->view('admin/content/table_kelas_ta_add');
+            } else if ($page == 'Batch Kelas Tahun Ajaran add') {
+                $this->load->view('admin/content/table_kelas_ta_batch');
             } else if ($page == 'Matpel Tahun Ajaran') {
                 $this->load->view('admin/content/table_matpel_ta');
+            } else if ($page == 'Matpel Tahun Ajaran add') {
+                $this->load->view('admin/content/table_matpel_ta_add');
+            } else if ($page == 'Batch Matpel Ta add') {
+                $this->load->view('admin/content/table_matpel_ta_batch');
             }
             ?>
 

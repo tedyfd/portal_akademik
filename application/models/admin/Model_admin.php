@@ -7,9 +7,19 @@ class Model_admin extends CI_Model
         return $this->db->query('SELECT * FROM pengumuman ORDER BY id DESC')->result_array();
     }
 
+    function list_ta()
+    {
+        return $this->db->get('th_ajaran')->result_array();
+    }
+
     function list_kelas()
     {
         return $this->db->get('kelas')->result_array();
+    }
+
+    function list_matpel()
+    {
+        return $this->db->get('matpel')->result_array();
     }
 
     function list_kelas_ta()

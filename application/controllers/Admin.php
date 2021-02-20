@@ -232,6 +232,23 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
     }
 
+    public function siswa_add()
+    {
+        $nisn = $this->input->post('nisn');
+        $nis = $this->input->post('nis');
+        $nama = $this->input->post('nama');
+        $password = $this->input->post('password');
+        $data = array(
+            'nis' => $nis,
+            'password' => $password,
+            'nama' => $nama,
+            'nisn' => $nisn,
+        );
+        $this->db->insert('siswa', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/siswa');
+    }
+
     public function import_siswa()
     {
         // $this->db->empty_table('siswa');
@@ -356,6 +373,20 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
     }
 
+    public function ta_add()
+    {
+        $ta1 = $this->input->post('ta1');
+        $ta2 = $this->input->post('ta2');
+        $ta = $ta1 . "/" . $ta2;
+
+        $data = array(
+            'th_ajaran' => $ta,
+        );
+        $this->db->insert('th_ajaran', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/ta');
+    }
+
     public function matpel()
     {
         $data['title'] = 'Mata Pelajaran';
@@ -370,6 +401,18 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
     }
 
+    public function matpel_add()
+    {
+        $matpel = $this->input->post('matpel');
+
+        $data = array(
+            'matpel' => $matpel,
+        );
+        $this->db->insert('matpel', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/matpel');
+    }
+
     public function kelas()
     {
         $data['title'] = 'Kelas';
@@ -382,6 +425,18 @@ class Admin extends CI_Controller
         $data['profile'] = 'smp';
 
         $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function kelas_add()
+    {
+        $kelas = $this->input->post('kelas');
+
+        $data = array(
+            'kelas' => $kelas,
+        );
+        $this->db->insert('kelas', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/kelas');
     }
 
     public function semester()
@@ -572,5 +627,26 @@ class Admin extends CI_Controller
         }
         $this->db->insert_batch('th_matpel', $data);
         redirect('admin/matpel_ta');
+    }
+
+    public function jadwal_matpel()
+    {
+        $data['title'] = 'Jadwal';
+
+        //model
+        $data['list_jadwal'] = $this->Model_admin->list_jadwal();
+
+        //name 
+        $data['page'] = 'Jadwal Matpel';
+        $data['profile'] = 'smp';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function jadwal_del($id)
+    {
+        $this->db->delete('jadwal', array('id_jadwal' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus!');
+        redirect('admin/jadwal_matpel');
     }
 }

@@ -69,6 +69,8 @@
                 $this->load->view('admin/content/table_matpel_ta_add');
             } else if ($page == 'Batch Matpel Ta add') {
                 $this->load->view('admin/content/table_matpel_ta_batch');
+            } else if ($page == 'Jadwal Matpel') {
+                $this->load->view('admin/content/table_jadwal');
             }
             ?>
 
@@ -91,42 +93,19 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header ">
-
-
-                    <p class="modal-title font-weight-bold" id="modaltitle"><?= $page ?></p>
-                </div>
-                <div class="modal-body ">
-                    <form action="<?= base_url('admin/import_') ?><?= $modal ?>" method="post"
-                        id="import_csv_<?= $modal ?>" enctype="multipart/form-data">
-                        <label>Select CSV File</label>
-                        <input type="file" name="csv_file" id="csv_file" required accept=".csv" />
-                        <button name="import_csv_<?= $modal ?>" id="import_<?= $modal ?>_btn"
-                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm modalbtn"><i
-                                class="fas fa-upload fa-sm "></i> Import CSV</button>
-                    </form>
-
-                    <p>Contoh file excel untuk mid (xlsx)<a href="<?= base_url('excel') ?>/templates_mid.xlsx">klik</a>
-                    </p>
-                    <p>Contoh file excel untuk mid (csv)<a href="<?= base_url('excel') ?>/templates_mid.csv">klik</a>
-                    </p>
-                    <p>Contoh file excel untuk SEMESTER 1 (xlsx)<a
-                            href="<?= base_url('excel') ?>/templates_semester1.xlsx">klik</a></p>
-                    <p>Contoh file excel untuk SEMESTER 1 (csv)<a
-                            href="<?= base_url('excel') ?>/templates_semester1.csv">klik</a></p>
-                    <p>Contoh file excel untuk list siswa (xlsx)<a
-                            href="<?= base_url('excel') ?>/templates_siswa.xlsx">klik</a></p>
-                    <p>Contoh file excel untuk list siswa (csv)<a
-                            href="<?= base_url('excel') ?>/templates_siswa.csv">klik</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <?php $this->load->view('admin/modal/import_ujian') ?>
+    <?php
+    if ($page == 'Matpel') {
+        $this->load->view('admin/modal/modal_matpel');
+    } else if ($page == 'Kelas') {
+        $this->load->view('admin/modal/modal_kelas');
+    } else if ($page == 'Tahun Ajaran') {
+        $this->load->view('admin/modal/modal_ta');
+    } else if ($page == 'Data Siswa') {
+        $this->load->view('admin/modal/modal_siswa');
+        echo ('tes');
+    }
+    ?>
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -156,6 +135,19 @@
         $('.modalbtn').on('click', function() {
             $('#editmodal').modal('show');
         });
+        $('#siswa_add_btn').on('click', function() {
+            $('#siswa_modal').modal('show');
+        });
+        $('.matpel_add_btn').on('click', function() {
+            $('#matpel_modal').modal('show');
+        });
+        $('#kelas_add_btn').on('click', function() {
+            $('#kelas_modal').modal('show');
+        });
+        $('#ta_add_btn').on('click', function() {
+            $('#ta_modal').modal('show');
+        });
+
     });
     var table = '';
     // DataTable, untuk Pencarian
@@ -266,6 +258,56 @@
     });
 
     $('.submit-btn').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data akan disimpan ke database!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form').submit();
+            }
+        })
+    });
+
+    $('#matpel_submmit').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data akan disimpan ke database!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form').submit();
+            }
+        })
+    });
+
+    $('#kelas_submmit').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data akan disimpan ke database!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form').submit();
+            }
+        })
+    });
+    $('#siswa_submmit').on('click', function(e) {
         e.preventDefault();
         Swal.fire({
             title: 'Apakah anda yakin?',

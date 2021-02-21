@@ -643,6 +643,49 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
     }
 
+    public function jadwal_matpel_add()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('matpel_ta', 'matapelajaran', 'required|trim');
+        $this->form_validation->set_rules('hari[]', 'hari', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Tambah Jadwal';
+
+            //model
+
+            //name 
+            $data['page'] = 'Jadwal Matpel add';
+            $data['profile'] = 'smp';
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_jadwal_matpel_add();
+        }
+    }
+
+    private function _jadwal_matpel_add()
+    {
+        $matpel_ta = $this->input->post('matpel_ta');
+
+        $for_query = '';
+        foreach ($this->input->post('hari') as $language) {
+            $for_query .= $language . ',';
+        }
+        $hari = substr($for_query, 0, -1);
+
+        $myArray = explode(',', $hari);
+        foreach ($myArray as $row) {
+            $data[] = array(
+                'id_th_matpel' => "$matpel_ta",
+                'id_hari' => $row[0],
+            );
+        }
+        $this->db->insert_batch('jadwal', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/jadwal_matpel');
+    }
+
     public function jadwal_del($id)
     {
         $this->db->delete('jadwal', array('id_jadwal' => $id));

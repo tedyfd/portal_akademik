@@ -8,7 +8,7 @@
             <div class="container mb-md-3">
                 <div class="row">
                     <div class="col col-md-3">
-                        <a href="<?= base_url('admin/matpel_ta_add') ?>"
+                        <a href="<?= base_url('admin/jadwal_matpel_add') ?>"
                             class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-upload fa-sm text-white-50"></i> Tambah Jadwal</a>
                     </div>

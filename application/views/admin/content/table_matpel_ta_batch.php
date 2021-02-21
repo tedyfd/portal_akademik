@@ -15,7 +15,7 @@ $matpel_ta = $this->db->query($matpel_ta_q)->result_array();
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-8">
-                        <h3 class="mb-0"> Kelas Tahun Ajaran </h3>
+                        <h3 class="mb-0"> Matpel berdasarkan Kelas dan Tahun Ajaran </h3>
                     </div>
                     <div class="col-4 text-right">
                     </div>

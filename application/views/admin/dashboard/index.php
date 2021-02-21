@@ -71,6 +71,8 @@
                 $this->load->view('admin/content/table_matpel_ta_batch');
             } else if ($page == 'Jadwal Matpel') {
                 $this->load->view('admin/content/table_jadwal');
+            } else if ($page == 'Jadwal Matpel add') {
+                $this->load->view('admin/content/table_jadwal_add');
             }
             ?>
 

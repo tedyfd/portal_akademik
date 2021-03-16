@@ -37,56 +37,11 @@ class Admin extends CI_Controller
         foreach ($file_data as $row) {
             $data[] = array(
                 'nis'    =>    $row["nis"],
-                'kelas' => $row["kelas"],
-                'semester'    =>    $row["semester"],
-                'ta' => $row["ta"],
-                'level'    =>    $row["level"],
-                'agama_p' => $row["agama_p"],
-                'agama_k' => $row["agama_k"],
-                'agama_mid' => $row["agama_mid"],
-                'pkn_p' => $row["pkn_p"],
-                'pkn_k' => $row["pkn_k"],
-                'pkn_mid' => $row["pkn_mid"],
-                'bindo_p' => $row["bindo_p"],
-                'bindo_k' => $row["bindo_k"],
-                'bindo_mid' => $row["bindo_mid"],
-                'mtk_p' => $row["mtk_p"],
-                'mtk_k' => $row["mtk_k"],
-                'mtk_mid' => $row["mtk_mid"],
-                'ipa_p' => $row["ipa_p"],
-                'ipa_k' => $row["ipa_k"],
-                'ipa_mid' => $row["ipa_mid"],
-                'ips_p' => $row["ips_p"],
-                'ips_k' => $row["ips_k"],
-                'ips_mid' => $row["ips_mid"],
-                'bing_p' => $row["bing_p"],
-                'bing_k' => $row["bing_k"],
-                'bing_mid' => $row["bing_mid"],
-                'seni_p' => $row["seni_p"],
-                'seni_k' => $row["seni_k"],
-                'seni_mid' => $row["seni_mid"],
-                'penjas_p' => $row["penjas_p"],
-                'penjas_k' => $row["penjas_k"],
-                'penjas_mid' => $row["penjas_mid"],
-                'prakarya_p' => $row["prakarya_p"],
-                'prakarya_k' => $row["prakarya_k"],
-                'prakarya_mid' => $row["prakarya_mid"],
-                'tik_p' => $row["tik_p"],
-                'tik_k' => $row["tik_k"],
-                'tik_mid' => $row["tik_mid"],
-                'speaking_p' => $row["speaking_p"],
-                'speaking_k' => $row["speaking_k"],
-                'speaking_mid' => $row["speaking_mid"],
-                'eks_1' => $row["eks_1"],
-                'eks_1n' => $row["eks_1n"],
-                'eks_2' => $row["eks_2"],
-                'eks_2n' => $row["eks_2n"],
-                'eks_3' => $row["eks_3"],
-                'eks_3n' => $row["eks_3n"],
-                'deskripsi' => $row["deskripsi"],
-                'sakit' => $row["sakit"],
-                'izin' => $row["izin"],
-                'alpha' => $row["alpha"],
+                'id_semester' => $row["id_semester"],
+                'id_th_matpel' => $row["id_th_matpel"],
+                'nilai_p' => $row["nilai_p"],
+                'nilai_k' => $row["nilai_k"],
+                'nilai_mid' => $row["nilai_mid"],
             );
         }
         $this->Model_import_csv->insert_mid($data);
@@ -234,8 +189,8 @@ class Admin extends CI_Controller
 
     public function siswa_add()
     {
-        $nisn = $this->input->post('nisn');
         $nis = $this->input->post('nis');
+        $nisn = $this->input->post('nisn');
         $nama = $this->input->post('nama');
         $password = $this->input->post('password');
         $data = array(
@@ -256,7 +211,7 @@ class Admin extends CI_Controller
         foreach ($file_data as $row) {
             $data[] = array(
                 'nis' => $row['nis'],
-                'password' => $row['tanggal_lahir'],
+                'password' => $row['password'],
                 'nama' => $row['nama'],
                 'nisn' => $row['nisn'],
             );

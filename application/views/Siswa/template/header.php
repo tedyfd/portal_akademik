@@ -1,6 +1,6 @@
 <?php
-$count_siswa = $this->db->query("SELECT count(id) AS count FROM siswa")->row_array();
-$count_matpel = $this->db->query("SELECT count(kode) AS count FROM matpel")->row_array();
+$count_siswa = $this->db->query("SELECT count(nis) AS count FROM siswa")->row_array();
+$count_matpel = $this->db->query("SELECT count(id_matpel) AS count FROM matpel")->row_array();
 $count_nilai = $this->db->query("SELECT count(id) AS count FROM nilai")->row_array();
 $count_kelas = $this->db->query("SELECT count(kelas) AS count FROM kelas")->row_array();
 ?>

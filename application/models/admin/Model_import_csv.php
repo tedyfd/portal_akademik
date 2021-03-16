@@ -4,7 +4,7 @@ class Model_import_csv extends CI_Model
 {
     function insert_mid($data)
     {
-        $this->db->insert_batch('nilai', $data);
+        $this->db->insert_batch('nilai_mid', $data);
     }
     function insert_semester($data)
     {

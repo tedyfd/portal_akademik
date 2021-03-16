@@ -45,6 +45,10 @@
                 $this->load->view('siswa/content/pengumuman');
             } else if ($page == 'Detail Pengumuman') {
                 $this->load->view('siswa/content/detail_pengumuman');
+            } else if ($page == 'Matpel') {
+                $this->load->view('siswa/content/table_list_matpel');
+            } else if ($page == 'Nilai') {
+                $this->load->view('siswa/content/table_list_nilai');
             }
             ?>
 

@@ -39,4 +39,23 @@ class Model_siswa extends CI_Model
     {
         return $this->db->query("select * from pengumuman where id=$id")->row_array();
     }
+
+    function list_matpel($nis)
+    {
+        $query = "SELECT siswa.nis, siswa.nama,siswa.nisn, th_ajaran.th_ajaran,kelas.kelas, matpel.matpel, hari.hari  from siswa
+        INNER JOIN th_kelas_siswa on th_kelas_siswa.nis = siswa.nis
+        
+        INNER JOIN th_kelas on th_kelas_siswa.id_th_kelas = th_kelas.id_th_kelas
+        INNER JOIN th_ajaran on th_kelas.id_th = th_ajaran.id_th
+        INNER JOIN kelas on th_kelas.id_kelas = kelas.id_kelas
+        
+        INNER JOIN th_matpel on th_kelas.id_th_kelas = th_matpel.id_th_kelas
+        INNER JOIN matpel on th_matpel.id_matpel = matpel.id_matpel
+				
+		LEFT JOIN jadwal on th_matpel.id_th_matpel = jadwal.id_th_matpel
+		INNER JOIN hari on jadwal.id_hari = hari.id_hari
+       
+        where siswa.nis ='$nis'";
+        return $this->db->query($query)->result_array();
+    }
 }

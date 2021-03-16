@@ -50,4 +50,30 @@ class Siswa extends CI_Controller
 
         $this->load->view('siswa/dashboard/index', $data);
     }
+
+    public function matpel()
+    {
+        $data['title'] = 'Matapelajaran';
+
+        //model
+        $data['list_matpel'] = $this->Model_siswa->list_matpel($this->session->userdata('username'));
+
+        //name 
+        $data['page'] = 'Matpel';
+
+        $this->load->view('siswa/dashboard/index', $data);
+    }
+
+    public function nilai()
+    {
+        $data['title'] = 'Hasil Penilaian';
+
+        //model
+        $data['list_matpel'] = $this->Model_siswa->list_matpel($this->session->userdata('username'));
+
+        //name 
+        $data['page'] = 'Nilai';
+
+        $this->load->view('siswa/dashboard/index', $data);
+    }
 }

@@ -95,7 +95,6 @@
         </div>
     </div>
 
-    <?php $this->load->view('admin/modal/import_ujian') ?>
     <?php
     if ($page == 'Matpel') {
         $this->load->view('admin/modal/modal_matpel');
@@ -105,9 +104,12 @@
         $this->load->view('admin/modal/modal_ta');
     } else if ($page == 'Data Siswa') {
         $this->load->view('admin/modal/modal_siswa');
-        echo ('tes');
+        $this->load->view('admin/modal/modal_import_siswa');
+    } else if ($page == 'Mid Gasal') {
+        $this->load->view('admin/modal/import_ujian');
     }
     ?>
+
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>

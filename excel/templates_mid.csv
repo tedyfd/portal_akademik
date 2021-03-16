@@ -1,9 +1,9 @@
-nis;kelas;semester;ta;level;agama_p;agama_k;agama_mid;pkn_p;pkn_k;pkn_mid;bindo_p;bindo_k;bindo_mid;mtk_p;mtk_k;mtk_mid;ipa_p;ipa_k;ipa_mid;ips_p;ips_k;ips_mid;bing_p;bing_k;bing_mid;seni_p;seni_k;seni_mid;penjas_p;penjas_k;penjas_mid;prakarya_p;prakarya_k;prakarya_mid;tik_p;tik_k;tik_mid;speaking_p;speaking_k;speaking_mid;eks_1;eks_1n;eks_2;eks_2n;eks_3;eks_3n;sakit;izin;alpha;deskripsi
-04.192035;VII A;Mid Gasal;2020/2021;Basic 7;72;80;72;80;85;73;76;88;76;65;70;60;75;80;70;72;73;70;84;82;78;72;61;63;72;70;70;;;;71;72;73;74;75;76;;;;;;;1;;;Kerjakanlah tugas tepat waktu dan bertanya kepada guru jika tidak mengerti. Harus lebih baik, disiplin, dan teratur dalam belajar. Buatlah masa depanmu lebih cemerlang dengan antusiasmu dalam belajar, lebih ramah dan praktekkan kasih kepada sesamamu.
-04.191902;VIII A;Mid Gasal;2020/2021;Basic 3;74;80;77;83;85;78;76;88;76;73;76;80;79;77;70;78;76;70;72;61;70;78;77;90;77;75;70;77;78;79;;;;80;81;82;;;;;;;1;;;Kerjakanlah tugas tepat waktu dan bertanya kepada guru jika tidak mengerti. Harus lebih baik, disiplin, dan teratur dalam belajar. Buatlah masa depanmu lebih cemerlang dengan antusiasmu dalam belajar, lebih ramah dan praktekkan kasih kepada sesamamu.
-04.192069;IX A;Mid Gasal;2020/2021;Basic 5;94;90;92;92;85;88;83;83;76;83;88;88;79;80;70;84;80;70;70;76;90;74;77;88;82;78;74;83;84;85;;;;86;87;88;;;;;;;;2;;Harus lebih baik, disiplin, dan teratur dalam belajar. Buatlah masa depanmu lebih cemerlang dengan antusiasmu dalam belajar, lebih sopan dan praktekkan kasih kepada sesamamu.
-04.181679;VII A;Mid Gasal;2020/2021;Basic 4;78;80;77;77;84;94;83;76;76;80;84;96;78;85;84;76;83;68;72;76;84;70;72;85;57;85;85;;;;89;90;91;92;93;94;;;;;;;;2;;Masih ada nilai yang belum tuntas, kamu lebih disiplin dengan waktu. Hadir dalam pembelajaran Daring tepat waktu. Semangat!
-04.181611;VIII A;Mid Gasal;2020/2021;Intermediate 2;84;82;76;77;82;81;73;77;76;82;87;96;63;80;62;61;86;72;71;73;82;63;75;55;67;90;56;95;96;97;;;;98;99;100;;;;;;;1;;1;Banyak nilai yang masih belum sampai KKM. Lebih peduli dengan tugas-tugas yang diberikan oleh guru dan belajar bertanggung jawab. Semangat kamu pasti bisa!
-04.181658;VIII B;Mid Genap;2019/2020;Intermediate 2;93;90;93;93;89;100;85;90;95;94;89;92;94;88;84;84;88;94;95;75;86;91;93;77;87;85;72;95;96;97;;;;98;99;100;;;;;;;1;;1;Selamat, kamu memperoleh hasil yang sangat baik. Tingkatkan lagi prestasi kamu. Semangat!
-04.181800;IX A;Mid Genap;2019/2020;Basic 2;86;76;100;89;86;98;86;81;88;95;90;96;90;87;90;80;87;92;93;79;82;90;90;98;85;85;73;95;96;97;;;;98;99;100;;;;;;;;;1;Kamu memperoleh hasil yang baik, tingkatkan lagi prestasi kamu. Semangat!
-04.181577;VII B;Mid Genap;2019/2020;Intermediate 2;84;80;87;91;86;98;80;83;85;84;86;96;83;85;88;66;81;88;91;82;80;81;72;55;88;80;76;;;;95;96;97;98;99;100;;;;;;;;;10;Masih ada nilai yang  belum sampai KKM. Lebih peduli dengan tugas-tugas yang diberikan oleh guru dan belajar bertanggung jawab. Semangat kamu pasti bisa!
+nis;id_semester;id_th_matpel;nilai_p;nilai_k;nilai_mid
+04.192035;1;2;100;90;90
+04.191902;1;2;100;90;90
+04.192069;1;2;100;90;90
+04.181679;1;2;100;90;90
+04.181611;1;2;100;90;90
+04.181658;1;2;100;90;90
+04.181800;1;2;100;90;90
+04.181577;1;2;100;90;90

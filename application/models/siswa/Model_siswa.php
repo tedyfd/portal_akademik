@@ -58,4 +58,17 @@ class Model_siswa extends CI_Model
         where siswa.nis ='$nis'";
         return $this->db->query($query)->result_array();
     }
+    function list_nilai($nis)
+    {
+        $query = "SELECT kelas.kelas, th_ajaran.th_ajaran, matpel.matpel, semester.semester, nilai_mid.* FROM nilai_mid
+        INNER JOIN semester ON semester.id_semester = nilai_mid.id_semester
+        INNER JOIN th_matpel ON nilai_mid.id_th_matpel = th_matpel.id_th_matpel
+        INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
+        INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
+        INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th 
+        INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
+        where nilai_mid.nis='$nis'";
+
+        return $this->db->query($query)->result_array();
+    }
 }

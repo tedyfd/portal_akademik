@@ -69,10 +69,25 @@ class Siswa extends CI_Controller
         $data['title'] = 'Hasil Penilaian';
 
         //model
-        $data['list_matpel'] = $this->Model_siswa->list_matpel($this->session->userdata('username'));
+        $nis = $this->session->userdata('username');
+        $data['list_nilai'] = $this->Model_siswa->list_nilai($nis);
 
         //name 
         $data['page'] = 'Nilai';
+
+        $this->load->view('siswa/dashboard/index', $data);
+    }
+
+    public function nilai_dtl($id_th_kelas, $id_semester)
+    {
+        $data['title'] = 'Detail Penilaian';
+
+        //model
+        $nis = $this->session->userdata('username');
+        $data['list_nilai'] = $this->Model_siswa->list_nilai_dtl($nis, $id_th_kelas, $id_semester);
+
+        //name 
+        $data['page'] = 'Nilai Detail';
 
         $this->load->view('siswa/dashboard/index', $data);
     }

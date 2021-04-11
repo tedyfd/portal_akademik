@@ -41,8 +41,10 @@
 
             if ($page == 'Raport (semua jenis)') {
                 $this->load->view('admin/content/dashboard');
-            } else if ($page == 'Mid Gasal') {
+            } else if ($page == 'Raport Mid') {
                 $this->load->view('admin/content/table_mid');
+            } else if ($page == 'Raport Semester') {
+                $this->load->view('admin/content/table_semester');
             } else if ($page == 'Data Siswa') {
                 $this->load->view('admin/content/table_siswa');
             } else if ($page == 'Pengumuman') {
@@ -105,8 +107,11 @@
     } else if ($page == 'Data Siswa') {
         $this->load->view('admin/modal/modal_siswa');
         $this->load->view('admin/modal/modal_import_siswa');
-    } else if ($page == 'Mid Gasal') {
+    } else if ($page == 'Raport Mid') {
         $this->load->view('admin/modal/import_ujian');
+        $this->load->view('admin/modal/modal_add_mid');
+    } else if ($page == 'Raport Semester') {
+        $this->load->view('admin/modal/modal_add_semester');
     }
     ?>
 
@@ -151,6 +156,13 @@
         $('#ta_add_btn').on('click', function() {
             $('#ta_modal').modal('show');
         });
+        $('#mid_add_btn').on('click', function() {
+            $('#mid_modal').modal('show');
+        });
+        $('#semester_add_btn').on('click', function() {
+            $('#semester_modal').modal('show');
+        });
+
 
     });
     var table = '';
@@ -187,30 +199,30 @@
         ],
     });
 
-    $('#import_csv_mid').on('submit', function(event) {
-        event.preventDefault();
-        $.ajax({
-            url: "<?php echo base_url(); ?>admin/import_mid",
-            method: "POST",
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function() {
-                $('#import_mid_btn').html('Importing...');
-            },
-            success: function(data) {
-                $('#import_csv_mid')[0].reset();
-                $('#import_mid_btn').attr('disabled', false);
-                $('#import_mid_btn').html('Import Done');
-                alert("Import berhasil!");
-                location.reload();
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Gagal Menyimpan");
-            }
-        })
-    });
+    // $('#import_csv_mid').on('submit', function(event) {
+    //     event.preventDefault();
+    //     $.ajax({
+    //         url: "<?php echo base_url(); ?>admin/import_mid",
+    //         method: "POST",
+    //         data: new FormData(this),
+    //         contentType: false,
+    //         cache: false,
+    //         processData: false,
+    //         beforeSend: function() {
+    //             $('#import_mid_btn').html('Importing...');
+    //         },
+    //         success: function(data) {
+    //             $('#import_csv_mid')[0].reset();
+    //             $('#import_mid_btn').attr('disabled', false);
+    //             $('#import_mid_btn').html('Import Done');
+    //             alert("Import berhasil!");
+    //             location.reload();
+    //         },
+    //         error: function(XMLHttpRequest, textStatus, errorThrown) {
+    //             alert("Gagal Menyimpan");
+    //         }
+    //     })
+    // });
 
     $('#import_csv_semester').on('submit', function(event) {
         event.preventDefault();
@@ -354,6 +366,42 @@
                 document.location.href = href;
             }
         })
+    });
+
+    $("#raport_semester_edit_btn").on('click', function() {
+        let id = $(this).data('id');
+        let nis = $(this).data('nis');
+        let semester = $(this).data('semester');
+        let matpel = $(this).data('matpel');
+        let nilai_p = $(this).data('nilai_p');
+        let nilai_k = $(this).data('nilai_k');
+        let nilai_s = $(this).data('nilai_s');
+
+        $(".modal-body #id_edit").val(id);
+        $(".modal-body #nis_edit").val(nis);
+        $(".modal-body #semester_edit").val(semester);
+        $(".modal-body #matpel_edit").val(matpel);
+        $(".modal-body #nilai_p_edit").val(nilai_p);
+        $(".modal-body #nilai_k_edit").val(nilai_k);
+        $(".modal-body #nilai_s_edit").val(nilai_s);
+    });
+
+    $("#raport_mid_edit_btn").on('click', function() {
+        let id = $(this).data('id');
+        let nis = $(this).data('nis');
+        let semester = $(this).data('semester');
+        let matpel = $(this).data('matpel');
+        let nilai_p = $(this).data('nilai_p');
+        let nilai_k = $(this).data('nilai_k');
+        let nilai_mid = $(this).data('nilai_mid');
+
+        $(".modal-body #id_edit").val(id);
+        $(".modal-body #nis_edit").val(nis);
+        $(".modal-body #semester_edit").val(semester);
+        $(".modal-body #matpel_edit").val(matpel);
+        $(".modal-body #nilai_p_edit").val(nilai_p);
+        $(".modal-body #nilai_k_edit").val(nilai_k);
+        $(".modal-body #nilai_mid_edit").val(nilai_mid);
     });
     </script>
 </body>

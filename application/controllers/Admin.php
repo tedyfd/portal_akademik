@@ -32,19 +32,29 @@ class Admin extends CI_Controller
 
     public function import_mid()
     {
-        $this->db->empty_table('nilai');
         $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
         foreach ($file_data as $row) {
+            if ($row['semester'] == 'Mid Gasal') {
+                $row['semester'] = '1';
+            }
             $data[] = array(
-                'nis'    =>    $row["nis"],
-                'id_semester' => $row["id_semester"],
-                'id_th_matpel' => $row["id_th_matpel"],
-                'nilai_p' => $row["nilai_p"],
-                'nilai_k' => $row["nilai_k"],
-                'nilai_mid' => $row["nilai_mid"],
+                'nis' => $row['nis'],
+                'id_semester' => $row['semester'],
+                'id_th_matpel' => '1',
+
             );
+            // $data[] = array(
+            //     'nis'    =>    $row["nis"],
+            //     'id_semester' => $row["id_semester"],
+            //     'id_th_matpel' => $row["id_th_matpel"],
+            //     'nilai_p' => $row["nilai_p"],
+            //     'nilai_k' => $row["nilai_k"],
+            //     'nilai_mid' => $row["nilai_mid"],
+            // );
+
+            var_dump($data);
         }
-        $this->Model_import_csv->insert_mid($data);
+        // $this->Model_import_csv->insert_mid($data);
     }
 
     public function import_semester()
@@ -117,52 +127,152 @@ class Admin extends CI_Controller
 
         //model
         $semester = 'Mid Gasal';
-        $data['mid'] = $this->Model_raport->mid($semester);
+        $data['mid'] = $this->Model_admin->mid();
+        $data['semester'] = $this->Model_admin->list_semester();
+        $data['matpel'] = $this->Model_admin->list_matpel_ta();
+        $data['nis'] = $this->db->get('siswa')->result_array();
 
         //name 
-        $data['page'] = 'Mid Gasal';
+        $data['page'] = 'Raport Mid';
         $data['profile'] = 'smp';
         $data['modal'] = 'mid';
 
         $this->load->view('admin/dashboard/index', $data);
     }
-    public function raport_mid2()
+
+    public function raport_mid_insert()
     {
-        $data['title'] = 'Mid Genap';
+        $nis = $this->input->post('nis');
+        $matpel = $this->input->post('matpel');
+        $semester = $this->input->post('semester');
+        $nilai_p = $this->input->post('nilai_p');
+        $nilai_k = $this->input->post('nilai_k');
+        $nilai_mid = $this->input->post('nilai_mid');
 
-        //model
-        $semester = 'Mid Genap';
-        $data['mid'] = $this->Model_raport->mid($semester);
-
-        //name 
-        $data['page'] = 'Mid Genap';
-        $data['profile'] = 'smp';
-        $data['modal'] = 'mid';
-
-        $this->load->view('admin/dashboard/index', $data);
+        $data = array(
+            'nis' => $nis,
+            'id_semester' => $semester,
+            'id_th_matpel' => $matpel,
+            'nilai_p' => $nilai_p,
+            'nilai_k' => $nilai_k,
+            'nilai_mid' => $nilai_mid
+        );
+        $this->db->insert('nilai_mid', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/raport_mid1');
     }
+
+    public function raport_mid_edit()
+    {
+        $id = $this->input->post('id');
+        $nis = $this->input->post('nis');
+        $matpel = $this->input->post('matpel');
+        $semester = $this->input->post('semester');
+        $nilai_p = $this->input->post('nilai_p');
+        $nilai_k = $this->input->post('nilai_k');
+        $nilai_mid = $this->input->post('nilai_mid');
+
+        $data = array(
+            'nis' => $nis,
+            'id_semester' => $semester,
+            'id_th_matpel' => $matpel,
+            'nilai_p' => $nilai_p,
+            'nilai_k' => $nilai_k,
+            'nilai_mid' => $nilai_mid,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('nilai_mid', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/raport_mid1');
+    }
+
+    public function raport_mid_del($id)
+    {
+        $this->db->delete('nilai_mid', array('id' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus');
+        redirect('admin/raport_mid1');
+    }
+
     public function raport_s1()
     {
         $data['title'] = 'SEMESTER 1';
 
         //model
         $semester = 'SEMESTER 1';
-        $data['mid'] = $this->Model_raport->mid($semester);
+        $data['semester'] = $this->Model_admin->semester();
+        $data['list_semester'] = $this->Model_admin->list_semester();
+        $data['matpel'] = $this->Model_admin->list_matpel_ta();
+        $data['nis'] = $this->db->get('siswa')->result_array();
+
 
         //name 
-        $data['page'] = 'SEMESTER 1';
+        $data['page'] = 'Raport Semester';
         $data['profile'] = 'smp';
         $data['modal'] = 'semester';
 
         $this->load->view('admin/dashboard/index', $data);
     }
+
+    public function raport_semester_del($id)
+    {
+        $this->db->delete('nilai_semester', array('id' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus');
+        redirect('admin/raport_s1');
+    }
+
+    public function raport_semester_insert()
+    {
+        $nis = $this->input->post('nis');
+        $matpel = $this->input->post('matpel');
+        $semester = $this->input->post('semester');
+        $nilai_p = $this->input->post('nilai_p');
+        $nilai_k = $this->input->post('nilai_k');
+        $nilai_s = $this->input->post('nilai_sikap');
+
+        $data = array(
+            'nis' => $nis,
+            'id_semester' => $semester,
+            'id_th_matpel' => $matpel,
+            'nilai_p' => $nilai_p,
+            'nilai_k' => $nilai_k,
+            'nilai_s' => $nilai_s,
+        );
+        $this->db->insert('nilai_semester', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/raport_s1');
+    }
+
+    public function raport_semester_edit()
+    {
+        $id = $this->input->post('id');
+        $nis = $this->input->post('nis');
+        $matpel = $this->input->post('matpel');
+        $semester = $this->input->post('semester');
+        $nilai_p = $this->input->post('nilai_p');
+        $nilai_k = $this->input->post('nilai_k');
+        $nilai_s = $this->input->post('nilai_s');
+
+        $data = array(
+            'nis' => $nis,
+            'id_semester' => $semester,
+            'id_th_matpel' => $matpel,
+            'nilai_p' => $nilai_p,
+            'nilai_k' => $nilai_k,
+            'nilai_s' => $nilai_s,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('nilai_semester', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/raport_s1');
+    }
+
     public function raport_s2()
     {
         $data['title'] = 'SEMESTER 2';
 
         //model
         $semester = 'SEMESTER 2';
-        $data['mid'] = $this->Model_raport->mid($semester);
+        $data['semester'] = $this->Model_admin->mid($semester);
 
         //name 
         $data['page'] = 'SEMESTER 2';

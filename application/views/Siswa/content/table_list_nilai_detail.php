@@ -18,7 +18,10 @@
                     <thead class="thead-light">
                         <tr>
                             <th scope="col" class="sort" data-sort="name">No</th>
-                            <th scope="col" class="sort" data-sort="budget">Nilai</th>
+                            <th scope="col" class="sort" data-sort="budget">Mata Pelajaran</th>
+                            <th scope="col" class="sort" data-sort="budget">Nilai Pengetahuan</th>
+                            <th scope="col" class="sort" data-sort="budget">Nilai Keterampilan</th>
+                            <th scope="col" class="sort" data-sort="budget">Nilai MID</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -26,12 +29,10 @@
                         <?php foreach ($list_nilai as $row) : ?>
                         <tr>
                             <td><?= $n++; ?></td>
-                            <td>
-                                <a
-                                    href="<?= base_url('siswa/nilai_dtl/') . $row['id_th_kelas'] . "/" . $row['id_semester'] ?>">
-                                    <?= "(" . $row['th_ajaran'] . ") " . $row['kelas'] . " - " . $row['semester'] . " - " . $row['matpel'] . "" ?>
-                                </a>
-                            </td>
+                            <td><?= $row['matpel'] ?></td>
+                            <td><?= $row['nilai_p'] ?></td>
+                            <td><?= $row['nilai_k'] ?></td>
+                            <td><?= $row['nilai_mid'] ?></td>
                         </tr>
                         <?php endforeach; ?>
 

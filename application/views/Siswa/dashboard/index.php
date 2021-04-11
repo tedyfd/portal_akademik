@@ -49,6 +49,8 @@
                 $this->load->view('siswa/content/table_list_matpel');
             } else if ($page == 'Nilai') {
                 $this->load->view('siswa/content/table_list_nilai');
+            } else if ($page == 'Nilai Detail') {
+                $this->load->view('siswa/content/table_list_nilai_detail');
             }
             ?>
 

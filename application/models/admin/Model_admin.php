@@ -57,4 +57,15 @@ class Model_admin extends CI_Model
         ";
         return $this->db->query($query)->result_array();
     }
+    function mid()
+    {
+        $query = "SELECT * FROM nilai_mid";
+        return $this->db->query($query)->result_array();
+    }
+
+    function semester()
+    {
+        $query = "SELECT * FROM nilai_semester";
+        return $this->db->query($query)->result_array();
+    }
 }

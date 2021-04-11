@@ -38,7 +38,7 @@
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-body px-lg-5 py-lg-5">
                             <div class="text-center text-muted mb-4">
-                                <small>Portal Akademik</small>
+                                <h2>Portal Akademik</h2>
                             </div>
                             <div class="btn-wrapper text-center">
                                 <a href="<?= base_url('login_adm') ?>" class="btn btn-neutral btn-icon">
@@ -67,18 +67,11 @@
             <div class="row align-items-center justify-content-xl-between">
                 <div class="col-xl-6">
                     <div class="copyright text-center text-xl-left text-muted">
-                        &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
-                            target="_blank">Creative Tim</a>
+                        &copy; <?= date("Y") ?> <a href="https://www.uib.ac.id/" class="font-weight-bold ml-1"
+                            target="_blank">Universitas Internasional Batam</a>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-                        </li>
 
-                    </ul>
-                </div>
             </div>
         </div>
     </footer>

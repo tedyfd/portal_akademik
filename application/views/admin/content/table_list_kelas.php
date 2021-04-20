@@ -20,20 +20,27 @@
                             <th scope="col" class="sort" data-sort="name">No</th>
                             <th scope="col" class="sort" data-sort="budget">ID</th>
                             <th scope="col" class="sort" data-sort="status">Nama Kelas</th>
+                            <th scope="col" class="sort" data-sort="status">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="list">
                         <?php $n = 1; ?>
-                        <?php foreach ($list_kelas as $l) : ?>
+                        <?php foreach ($list_kelas as $row) : ?>
                         <tr>
                             <th scope="row">
                                 <?= $n++; ?>
                             </th>
                             <td class="budget">
-                                <?= $l['id_kelas'] ?>
+                                <?= $row['id_kelas'] ?>
                             </td>
                             <td class="budget">
-                                <?= $l['kelas'] ?>
+                                <?= $row['kelas'] ?>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary"
+                                    href="<?= base_url('admin/kelas_edit/') . $row['id_kelas'] ?>">Ubah</a>
+                                <a href="<?= base_url('admin/kelas_del/') . $row['id_kelas'] ?>"
+                                    class="btn btn-danger delete-btn-conf">Delete</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

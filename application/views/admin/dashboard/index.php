@@ -53,20 +53,30 @@
                 $this->load->view('admin/content/table_pengumuman_add');
             } else if ($page == 'Tahun Ajaran') {
                 $this->load->view('admin/content/table_list_ta');
+            } else if ($page == 'Tahun Ajaran Edit') {
+                $this->load->view('admin/content/edit/ta_edit');
             } else if ($page == 'Kelas') {
                 $this->load->view('admin/content/table_list_kelas');
+            } else if ($page == 'Kelas Edit') {
+                $this->load->view('admin/content/edit/kelas_edit');
             } else if ($page == 'Matpel') {
                 $this->load->view('admin/content/table_list_matpel');
+            } else if ($page == 'Mata Pelajaran Edit') {
+                $this->load->view('admin/content/edit/matpel_edit');
             } else if ($page == 'Semester') {
                 $this->load->view('admin/content/table_list_semester');
             } else if ($page == 'Kelas Tahun Ajaran') {
                 $this->load->view('admin/content/table_kelas_ta');
+            } else if ($page == 'Kelas Tahun Ajaran Edit') {
+                $this->load->view('admin/content/edit/kelas_ta_edit');
             } else if ($page == 'Kelas Tahun Ajaran add') {
                 $this->load->view('admin/content/table_kelas_ta_add');
             } else if ($page == 'Batch Kelas Tahun Ajaran add') {
                 $this->load->view('admin/content/table_kelas_ta_batch');
             } else if ($page == 'Matpel Tahun Ajaran') {
                 $this->load->view('admin/content/table_matpel_ta');
+            } else if ($page == 'Matpel Tahun Ajaran Edit') {
+                $this->load->view('admin/content/edit/matpel_ta_edit');
             } else if ($page == 'Matpel Tahun Ajaran add') {
                 $this->load->view('admin/content/table_matpel_ta_add');
             } else if ($page == 'Batch Matpel Ta add') {
@@ -118,13 +128,16 @@
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="<?= base_url() ?>assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
     <script src="<?= base_url() ?>assets/vendor/js-cookie/js.cookie.js"></script>
     <script src="<?= base_url() ?>assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-    <script src="<?= base_url() ?>assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-scroll-lock@3.1.3/jquery-scrollLock.min.js"></script>
+
     <!-- Optional JS -->
-    <script src="<?= base_url() ?>assets/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="<?= base_url() ?>assets/vendor/chart.js/dist/Chart.extension.js"></script>
+    <!-- <script src="<?= base_url() ?>assets/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/chart.js/dist/Chart.extension.js"></script> -->
     <!-- Argon JS -->
     <script src="<?= base_url() ?>assets/js/argon.js?v=1.2.0"></script>
 
@@ -141,6 +154,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
     $(document).ready(function() {
+
         $('.modalbtn').on('click', function() {
             $('#editmodal').modal('show');
         });
@@ -198,31 +212,6 @@
             [5, 10, 25, 50, "All"]
         ],
     });
-
-    // $('#import_csv_mid').on('submit', function(event) {
-    //     event.preventDefault();
-    //     $.ajax({
-    //         url: "<?php echo base_url(); ?>admin/import_mid",
-    //         method: "POST",
-    //         data: new FormData(this),
-    //         contentType: false,
-    //         cache: false,
-    //         processData: false,
-    //         beforeSend: function() {
-    //             $('#import_mid_btn').html('Importing...');
-    //         },
-    //         success: function(data) {
-    //             $('#import_csv_mid')[0].reset();
-    //             $('#import_mid_btn').attr('disabled', false);
-    //             $('#import_mid_btn').html('Import Done');
-    //             alert("Import berhasil!");
-    //             location.reload();
-    //         },
-    //         error: function(XMLHttpRequest, textStatus, errorThrown) {
-    //             alert("Gagal Menyimpan");
-    //         }
-    //     })
-    // });
 
     $('#import_csv_semester').on('submit', function(event) {
         event.preventDefault();
@@ -339,16 +328,6 @@
             }
         })
     });
-    </script>
-    <script>
-    const success = $('#flash-data').data('flashdata');
-    if (success) {
-        Swal.fire({
-            title: 'SUCCESS',
-            text: 'Data ' + success,
-            icon: 'success'
-        });
-    }
 
     $('.delete-btn-conf').on('click', function(e) {
         e.preventDefault();
@@ -403,6 +382,24 @@
         $(".modal-body #nilai_k_edit").val(nilai_k);
         $(".modal-body #nilai_mid_edit").val(nilai_mid);
     });
+
+    $("#matpel_edit_btn").on('click', function() {
+        let id = $(this).data('id');
+        let matpel = $(this).data('matpel');
+
+        $(".modal-body #id_edit").val(id);
+        $(".modal-body #matpel_edit").val(matpel);
+    });
+    </script>
+    <script>
+    const success = $('#flash-data').data('flashdata');
+    if (success) {
+        Swal.fire({
+            title: 'SUCCESS',
+            text: 'Data ' + success,
+            icon: 'success'
+        });
+    }
     </script>
 </body>
 

@@ -23,11 +23,11 @@
                 <table id="tabel1" class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col" class="sort" data-sort="name">No</th>
-                            <th scope="col" class="sort" data-sort="budget">Tahun Ajaran</th>
-                            <th scope="col" class="sort" data-sort="status">Kelas</th>
-                            <th scope="col" class="sort" data-sort="status">Mata Pelajaran</th>
-                            <th scope="col" class="sort" data-sort="completion">Aksi</th>
+                            <th class="sort">No</th>
+                            <th class="sort">Tahun Ajaran</th>
+                            <th class="sort">Kelas</th>
+                            <th class="sort">Mata Pelajaran</th>
+                            <th colspan="2" class="sort">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -38,6 +38,8 @@
                             <td><?= $l['th_ajaran'] ?></td>
                             <td><?= $l['kelas'] ?></td>
                             <td><?= $l['matpel'] ?></td>
+                            <td><a href="<?= base_url('admin/matpel_ta_edit/') . $l['id_th_matpel'] ?>"
+                                    class="btn btn-primary">Edit</a></td>
                             <td><a href="<?= base_url('admin/kelas_ta_del/') . $l['id_th_matpel'] ?>"
                                     class="btn btn-danger delete-btn-conf">Delete</a></td>
                         </tr>

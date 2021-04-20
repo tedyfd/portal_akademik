@@ -452,6 +452,39 @@ class Admin extends CI_Controller
         redirect('admin/ta');
     }
 
+    public function ta_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Tahun Ajaran';
+
+        //model
+        $data['ta'] = $this->db->get_where('th_ajaran', ['id_th' => $id])->row_array();
+
+        //name 
+        $data['page'] = 'Tahun Ajaran Edit';
+        $data['profile'] = 'smp';
+        $this->form_validation->set_rules('ta', 'Tahun Ajaran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'th_ajaran' => $this->input->post('ta'),
+            );
+            $this->db->where('id_th', $this->input->post('id'));
+            $this->db->update('th_ajaran', $data);
+            $this->session->set_flashdata('message', 'telah ditambahkan');
+            redirect('admin/ta');
+        }
+    }
+
+    public function ta_del($id)
+    {
+        $this->db->delete('th_ajaran', array('id_th' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus!');
+        redirect('admin/ta');
+    }
+
     public function matpel()
     {
         $data['title'] = 'Mata Pelajaran';
@@ -476,6 +509,40 @@ class Admin extends CI_Controller
         $this->db->insert('matpel', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');
         redirect('admin/matpel');
+    }
+
+    public function matpel_del($id)
+    {
+        $data = array('id_matpel' => $id);
+        $this->db->delete('matpel', $data);
+        $this->session->set_flashdata('message', 'telah dihapus!');
+        redirect('admin/matpel');
+    }
+
+    public function matpel_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Mata Pelajaran';
+
+        //model
+        $data['matpel'] = $this->db->get_where('matpel', ['id_matpel' => $id])->row_array();
+
+        //name 
+        $data['page'] = 'Mata Pelajaran Edit';
+        $data['profile'] = 'smp';
+        $this->form_validation->set_rules('matpel', 'Mata Pelajaran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'matpel' => $this->input->post('matpel'),
+            );
+            $this->db->where('id_matpel', $this->input->post('id'));
+            $this->db->update('matpel', $data);
+            $this->session->set_flashdata('message', 'telah ditambahkan');
+            redirect('admin/matpel');
+        }
     }
 
     public function kelas()
@@ -504,6 +571,39 @@ class Admin extends CI_Controller
         redirect('admin/kelas');
     }
 
+    public function kelas_del($id)
+    {
+        $this->db->delete('kelas', array('id_kelas' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus!');
+        redirect('admin/kelas');
+    }
+
+    public function kelas_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Kelas';
+
+        //model
+        $data['kelas'] = $this->db->get_where('kelas', ['id_kelas' => $id])->row_array();
+
+        //name 
+        $data['page'] = 'Kelas Edit';
+        $data['profile'] = 'smp';
+        $this->form_validation->set_rules('kelas', 'Tahun Ajaran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'kelas' => $this->input->post('kelas'),
+            );
+            $this->db->where('id_kelas', $this->input->post('id'));
+            $this->db->update('kelas', $data);
+            $this->session->set_flashdata('message', 'telah ditambahkan');
+            redirect('admin/kelas');
+        }
+    }
+
     public function semester()
     {
         $data['title'] = 'Semester';
@@ -530,6 +630,38 @@ class Admin extends CI_Controller
         $data['profile'] = 'smp';
 
         $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function kelas_ta_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Kelas Berdasarkan Tahun Ajaran';
+
+        //model
+        $data['kelas_ta'] = $this->Model_admin->list_kelas_ta($id);
+        $data['list_kelas'] = $this->Model_admin->list_kelas();
+        $data['list_ta'] = $this->Model_admin->list_ta();
+
+
+        //name 
+        $data['page'] = 'Kelas Tahun Ajaran Edit';
+        $data['profile'] = 'smp';
+        $this->form_validation->set_rules('ta', 'Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'id_th' => $this->input->post('ta'),
+                'id_kelas' => $this->input->post('kelas'),
+            );
+            $this->db->where('id_th_kelas', $this->input->post('id'));
+            $this->db->update('th_kelas', $data);
+            $this->session->set_flashdata('message', 'telah ditambahkan');
+            redirect('admin/kelas_ta');
+        }
     }
 
     public function kelas_ta_add()
@@ -618,6 +750,36 @@ class Admin extends CI_Controller
         $data['profile'] = 'smp';
 
         $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function matpel_ta_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Matpel Berdasarkan Kelas Tahun Ajaran';
+
+        //model
+        $data['matpel_ta'] = $this->Model_admin->list_matpel_ta($id);
+        $data['list_kelas_ta'] = $this->Model_admin->list_kelas_ta();
+        $data['list_matpel'] = $this->Model_admin->list_matpel();
+
+        //name 
+        $data['page'] = 'Matpel Tahun Ajaran Edit';
+        $data['profile'] = 'smp';
+        $this->form_validation->set_rules('ta_kelas', 'Kelas berdasarkan Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('matpel', 'Matapelajaran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'id_th_kelas' => $this->input->post('ta_kelas'),
+                'id_matpel' => $this->input->post('matpel'),
+            );
+            $this->db->where('id_th_matpel', $this->input->post('id'));
+            $this->db->update('th_matpel', $data);
+            $this->session->set_flashdata('message', 'telah ditambahkan');
+            redirect('admin/matpel_ta');
+        }
     }
 
     public function matpel_ta_add()

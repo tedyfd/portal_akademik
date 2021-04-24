@@ -121,7 +121,7 @@ class Admin extends CI_Controller
         $this->Model_import_csv->insert_semester($data);
     }
 
-    public function raport_mid1()
+    public function raport_mid()
     {
         $data['title'] = 'Mid Gasal';
 
@@ -159,41 +159,81 @@ class Admin extends CI_Controller
         );
         $this->db->insert('nilai_mid', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');
-        redirect('admin/raport_mid1');
+        redirect('admin/raport_mid');
     }
 
-    public function raport_mid_edit()
+    public function raport_mid_edit($id)
     {
-        $id = $this->input->post('id');
-        $nis = $this->input->post('nis');
-        $matpel = $this->input->post('matpel');
-        $semester = $this->input->post('semester');
-        $nilai_p = $this->input->post('nilai_p');
-        $nilai_k = $this->input->post('nilai_k');
-        $nilai_mid = $this->input->post('nilai_mid');
+        $this->load->library('form_validation');
 
-        $data = array(
-            'nis' => $nis,
-            'id_semester' => $semester,
-            'id_th_matpel' => $matpel,
-            'nilai_p' => $nilai_p,
-            'nilai_k' => $nilai_k,
-            'nilai_mid' => $nilai_mid,
-        );
-        $this->db->where('id', $id);
-        $this->db->update('nilai_mid', $data);
-        $this->session->set_flashdata('message', 'telah ditambahkan');
-        redirect('admin/raport_mid1');
+        $data['title'] = 'Raport Mid';
+
+        //model
+        $data['mid'] = $this->Model_admin->mid($id);
+        $data['semester'] = $this->Model_admin->list_semester();
+        $data['matpel'] = $this->Model_admin->list_matpel_ta();
+        $data['nis'] = $this->db->get('siswa')->result_array();
+
+        //name 
+        $data['page'] = 'Raport Mid Edit';
+        $data['profile'] = 'smp';
+        $data['modal'] = 'siswa';
+
+        $this->form_validation->set_rules('nis', 'NIS', 'required|trim');
+        $this->form_validation->set_rules('semester', 'Semester', 'required|trim');
+        $this->form_validation->set_rules('matpel', 'Matpel', 'required|trim');
+        $this->form_validation->set_rules('nilai_p', 'Nilai Pengetahuan', 'required|trim');
+        $this->form_validation->set_rules('nilai_k', 'Nilai Keterampilan', 'required|trim');
+        $this->form_validation->set_rules('nilai_mid', 'Nilai MID', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'nis' => $this->input->post('nis'),
+                'id_semester' => $this->input->post('semester'),
+                'id_th_matpel' => $this->input->post('matpel'),
+                'nilai_p' => $this->input->post('nilai_p'),
+                'nilai_k' => $this->input->post('nilai_k'),
+                'nilai_mid' => $this->input->post('nilai_mid'),
+            );
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('nilai_mid', $data);
+            $this->session->set_flashdata('message', 'telah diubah');
+            redirect('admin/raport_mid');
+        }
     }
+    // public function raport_mid_edit()
+    // {
+    //     $id = $this->input->post('id');
+    //     $nis = $this->input->post('nis');
+    //     $matpel = $this->input->post('matpel');
+    //     $semester = $this->input->post('semester');
+    //     $nilai_p = $this->input->post('nilai_p');
+    //     $nilai_k = $this->input->post('nilai_k');
+    //     $nilai_mid = $this->input->post('nilai_mid');
+
+    //     $data = array(
+    //         'nis' => $nis,
+    //         'id_semester' => $semester,
+    //         'id_th_matpel' => $matpel,
+    //         'nilai_p' => $nilai_p,
+    //         'nilai_k' => $nilai_k,
+    //         'nilai_mid' => $nilai_mid,
+    //     );
+    //     $this->db->where('id', $id);
+    //     $this->db->update('nilai_mid', $data);
+    //     $this->session->set_flashdata('message', 'telah ditambahkan');
+    //     redirect('admin/raport_mid');
+    // }
 
     public function raport_mid_del($id)
     {
         $this->db->delete('nilai_mid', array('id' => $id));
         $this->session->set_flashdata('message', 'telah dihapus');
-        redirect('admin/raport_mid1');
+        redirect('admin/raport_mid');
     }
 
-    public function raport_s1()
+    public function raport_s()
     {
         $data['title'] = 'SEMESTER 1';
 
@@ -213,11 +253,52 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
     }
 
+    public function raport_s_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Raport Semester';
+
+        //model
+        $data['semester'] = $this->Model_admin->semester($id);
+        $data['list_semester'] = $this->Model_admin->list_semester();
+        $data['matpel'] = $this->Model_admin->list_matpel_ta();
+        $data['nis'] = $this->db->get('siswa')->result_array();
+
+        //name 
+        $data['page'] = 'Raport Semester Edit';
+        $data['profile'] = 'smp';
+        $data['modal'] = 'siswa';
+
+        $this->form_validation->set_rules('nis', 'NIS', 'required|trim');
+        $this->form_validation->set_rules('semester', 'Semester', 'required|trim');
+        $this->form_validation->set_rules('matpel', 'Matpel', 'required|trim');
+        $this->form_validation->set_rules('nilai_p', 'Nilai Pengetahuan', 'required|trim');
+        $this->form_validation->set_rules('nilai_k', 'Nilai Keterampilan', 'required|trim');
+        $this->form_validation->set_rules('nilai_s', 'Nilai Semester', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'nis' => $this->input->post('nis'),
+                'id_semester' => $this->input->post('semester'),
+                'id_th_matpel' => $this->input->post('matpel'),
+                'nilai_p' => $this->input->post('nilai_p'),
+                'nilai_k' => $this->input->post('nilai_k'),
+                'nilai_s' => $this->input->post('nilai_s'),
+            );
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('nilai_semester', $data);
+            $this->session->set_flashdata('message', 'telah diubah');
+            redirect('admin/raport_s');
+        }
+    }
+
     public function raport_semester_del($id)
     {
         $this->db->delete('nilai_semester', array('id' => $id));
         $this->session->set_flashdata('message', 'telah dihapus');
-        redirect('admin/raport_s1');
+        redirect('admin/raport_s');
     }
 
     public function raport_semester_insert()
@@ -239,10 +320,10 @@ class Admin extends CI_Controller
         );
         $this->db->insert('nilai_semester', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');
-        redirect('admin/raport_s1');
+        redirect('admin/raport_s');
     }
 
-    public function raport_semester_edit()
+    public function raport_semester_edit($id)
     {
         $id = $this->input->post('id');
         $nis = $this->input->post('nis');
@@ -263,7 +344,7 @@ class Admin extends CI_Controller
         $this->db->where('id', $id);
         $this->db->update('nilai_semester', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');
-        redirect('admin/raport_s1');
+        redirect('admin/raport_s');
     }
 
     public function raport_s2()
@@ -295,6 +376,40 @@ class Admin extends CI_Controller
         $data['modal'] = 'siswa';
 
         $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function siswa_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Data Siswa';
+
+        //model
+        $data['siswa'] = $this->Model_admin->list_siswa($id);
+
+        //name 
+        $data['page'] = 'Data Siswa Edit';
+        $data['profile'] = 'smp';
+        $data['modal'] = 'siswa';
+
+        $this->form_validation->set_rules('nisn', 'Kelas berdasarkan Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('nis', 'Kelas berdasarkan Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('password', 'Kelas berdasarkan Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Kelas berdasarkan Tahun Ajaran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'nisn' => $this->input->post('nisn'),
+                'nis' => $this->input->post('nis'),
+                'password' => $this->input->post('password'),
+                'nama' => $this->input->post('nama'),
+            );
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('siswa', $data);
+            $this->session->set_flashdata('message', 'telah diubah');
+            redirect('admin/siswa');
+        }
     }
 
     public function siswa_add()
@@ -868,6 +983,37 @@ class Admin extends CI_Controller
         $data['profile'] = 'smp';
 
         $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function jadwal_matpel_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Jadwal';
+
+        //model
+        $data['jadwal'] = $this->Model_admin->list_jadwal($id);
+        $data['list_matpel_ta'] = $this->Model_admin->list_matpel_ta();
+        $data['list_hari'] = $this->Model_admin->list_hari();
+
+        //name 
+        $data['page'] = 'Jadwal Matpel Edit';
+        $data['profile'] = 'smp';
+
+        $this->form_validation->set_rules('ta_matpel', 'Kelas berdasarkan Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('hari', 'Matapelajaran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'id_th_matpel' => $this->input->post('ta_matpel'),
+                'id_hari' => $this->input->post('hari'),
+            );
+            $this->db->where('id_jadwal', $this->input->post('id'));
+            $this->db->update('jadwal', $data);
+            $this->session->set_flashdata('message', 'telah diubah');
+            redirect('admin/jadwal_matpel');
+        }
     }
 
     public function jadwal_matpel_add()

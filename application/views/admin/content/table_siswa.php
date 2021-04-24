@@ -24,12 +24,12 @@
                 <table id="tabel1" class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col" class="sort" data-sort="name">No</th>
-                            <th scope="col" class="sort" data-sort="budget">NISN</th>
-                            <th scope="col" class="sort" data-sort="status">NIS (Username)</th>
-                            <th scope="col">Passowrd</th>
-                            <th scope="col" class="sort" data-sort="completion">Nama</th>
-                            <th scope="col">Aksi</th>
+                            <th class="sort" data-sort="name">No</th>
+                            <th class="sort" data-sort="budget">NISN</th>
+                            <th class="sort" data-sort="status">NIS (Username)</th>
+                            <th>Passowrd</th>
+                            <th class="sort" data-sort="completion">Nama</th>
+                            <th colspan="2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -50,6 +50,9 @@
                             </td>
                             <td>
                                 <?= $m['nama'] ?>
+                            </td>
+                            <td><a class="btn btn-primary"
+                                    href="<?= base_url('admin/siswa_edit/') . $m['id'] ?>">Edit</a>
                             </td>
                             <td><a class="btn btn-danger delete-btn-conf"
                                     href="<?= base_url('admin/delete_siswa/') . $m['id'] ?>">Delete</a>

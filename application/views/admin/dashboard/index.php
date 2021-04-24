@@ -43,10 +43,16 @@
                 $this->load->view('admin/content/dashboard');
             } else if ($page == 'Raport Mid') {
                 $this->load->view('admin/content/table_mid');
+            } else if ($page == 'Raport Mid Edit') {
+                $this->load->view('admin/content/edit/mid_edit.php');
             } else if ($page == 'Raport Semester') {
                 $this->load->view('admin/content/table_semester');
+            } else if ($page == 'Raport Semester Edit') {
+                $this->load->view('admin/content/edit/semester_edit');
             } else if ($page == 'Data Siswa') {
                 $this->load->view('admin/content/table_siswa');
+            } else if ($page == 'Data Siswa Edit') {
+                $this->load->view('admin/content/edit/siswa_edit');
             } else if ($page == 'Pengumuman') {
                 $this->load->view('admin/content/table_pengumuman');
             } else if ($page == 'Pengumuman_add') {
@@ -85,6 +91,8 @@
                 $this->load->view('admin/content/table_jadwal');
             } else if ($page == 'Jadwal Matpel add') {
                 $this->load->view('admin/content/table_jadwal_add');
+            } else if ($page == 'Jadwal Matpel Edit') {
+                $this->load->view('admin/content/edit/jadwal_matpel_edit');
             }
             ?>
 

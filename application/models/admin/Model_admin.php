@@ -2,6 +2,14 @@
 
 class Model_admin extends CI_Model
 {
+    function list_siswa($id = null)
+    {
+        if ($id) {
+            return $this->db->get_where('siswa', ['id' => $id])->row_array();
+        } else {
+            return $this->db->get('siswa')->result_array();
+        }
+    }
     function list_pengumuman()
     {
         return $this->db->query('SELECT * FROM pengumuman ORDER BY id DESC')->result_array();
@@ -26,9 +34,13 @@ class Model_admin extends CI_Model
         return $this->db->get('matpel')->result_array();
     }
 
-    function list_semester()
+    function list_semester($id = null)
     {
-        return $this->db->get('semester')->result_array();
+        if ($id) {
+            return $this->db->get_where('semester', ['id_semester' => $id])->row_array();
+        } else {
+            return $this->db->get('semester')->result_array();
+        }
     }
 
     function list_kelas_ta($id = null)
@@ -69,27 +81,54 @@ class Model_admin extends CI_Model
         }
     }
 
-    function list_jadwal()
+    function list_jadwal($id = null)
     {
-        $query = "SELECT jadwal.id_jadwal, th_ajaran.th_ajaran, kelas.kelas, matpel.matpel, hari.hari FROM jadwal
-        INNER JOIN hari on jadwal.id_hari= hari.id_hari
-        INNER JOIN th_matpel on jadwal.id_th_matpel = th_matpel.id_th_matpel
-        INNER JOIN th_kelas on th_matpel.id_th_kelas = th_kelas.id_th_kelas
-        INNER JOIN matpel on th_matpel.id_matpel = matpel.id_matpel
-        INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
-        INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
-        ";
-        return $this->db->query($query)->result_array();
-    }
-    function mid()
-    {
-        $query = "SELECT * FROM nilai_mid";
-        return $this->db->query($query)->result_array();
+        if ($id) {
+            $query = "SELECT jadwal.id_jadwal,th_matpel.id_th_matpel, th_ajaran.th_ajaran, kelas.kelas, matpel.matpel, hari.id_hari, hari.hari FROM jadwal
+            INNER JOIN hari on jadwal.id_hari= hari.id_hari
+            INNER JOIN th_matpel on jadwal.id_th_matpel = th_matpel.id_th_matpel
+            INNER JOIN th_kelas on th_matpel.id_th_kelas = th_kelas.id_th_kelas
+            INNER JOIN matpel on th_matpel.id_matpel = matpel.id_matpel
+            INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+            INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
+            WHERE jadwal.id_jadwal='$id'
+            ";
+            return $this->db->query($query)->row_array();
+        } else {
+            $query = "SELECT jadwal.id_jadwal, th_ajaran.th_ajaran, kelas.kelas, matpel.matpel, hari.hari FROM jadwal
+            INNER JOIN hari on jadwal.id_hari= hari.id_hari
+            INNER JOIN th_matpel on jadwal.id_th_matpel = th_matpel.id_th_matpel
+            INNER JOIN th_kelas on th_matpel.id_th_kelas = th_kelas.id_th_kelas
+            INNER JOIN matpel on th_matpel.id_matpel = matpel.id_matpel
+            INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+            INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
+            ";
+            return $this->db->query($query)->result_array();
+        }
     }
 
-    function semester()
+    function list_hari()
     {
-        $query = "SELECT * FROM nilai_semester";
-        return $this->db->query($query)->result_array();
+        return $this->db->get('hari')->result_array();
+    }
+
+    function mid($id = null)
+    {
+        if ($id) {
+            return $this->db->get_where('nilai_mid', ['id' => $id])->row_array();
+        } else {
+            $query = "SELECT * FROM nilai_mid";
+            return $this->db->query($query)->result_array();
+        }
+    }
+
+    function semester($id = null)
+    {
+        if ($id) {
+            return $this->db->get_where('nilai_semester', ['id' => $id])->row_array();
+        } else {
+            $query = "SELECT * FROM nilai_semester";
+            return $this->db->query($query)->result_array();
+        }
     }
 }

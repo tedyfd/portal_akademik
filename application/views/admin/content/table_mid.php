@@ -50,12 +50,8 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" id="raport_mid_edit_btn" data-toggle="modal"
-                                            data-target="#edit_modal" data-id="<?= $row['id'] ?>"
-                                            data-nis="<?= $row['nis'] ?>" data-semester="<?= $row['id_semester'] ?>"
-                                            data-matpel="<?= $row['id_th_matpel'] ?>"
-                                            data-nilai_p="<?= $row['nilai_p'] ?>" data-nilai_k="<?= $row['nilai_k'] ?>"
-                                            data-nilai_mid="<?= $row['nilai_mid'] ?>">Ubah</a>
+                                        <a class="dropdown-item"
+                                            href="<?= base_url('admin/raport_mid_edit/') . $row['id'] ?>">Edit</a>
                                         <a class="dropdown-item delete-btn-conf"
                                             href="<?= base_url('admin/raport_mid_del/') . $row['id'] ?>">Hapus</a>
                                     </div>
@@ -73,7 +69,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -133,4 +129,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

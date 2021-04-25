@@ -70,7 +70,8 @@ class Siswa extends CI_Controller
 
         //model
         $nis = $this->session->userdata('username');
-        $data['list_nilai'] = $this->Model_siswa->list_nilai($nis);
+        $data['list_nilai_mid'] = $this->Model_siswa->list_nilai_mid($nis);
+        $data['list_nilai_semester'] = $this->Model_siswa->list_nilai_semester($nis);
 
         //name 
         $data['page'] = 'Nilai';
@@ -78,16 +79,29 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/dashboard/index', $data);
     }
 
-    public function nilai_dtl($id_th_kelas, $id_semester)
+    public function nilai_mid_dtl($id_th_kelas, $id_semester)
     {
         $data['title'] = 'Detail Penilaian';
 
         //model
         $nis = $this->session->userdata('username');
-        $data['list_nilai'] = $this->Model_siswa->list_nilai_dtl($nis, $id_th_kelas, $id_semester);
+        $data['list_nilai'] = $this->Model_siswa->list_nilai_mid_dtl($nis, $id_th_kelas, $id_semester);
 
         //name 
-        $data['page'] = 'Nilai Detail';
+        $data['page'] = 'Nilai MID Detail';
+
+        $this->load->view('siswa/dashboard/index', $data);
+    }
+    public function nilai_semester_dtl($id_th_kelas, $id_semester)
+    {
+        $data['title'] = 'Detail Penilaian';
+
+        //model
+        $nis = $this->session->userdata('username');
+        $data['list_nilai'] = $this->Model_siswa->list_nilai_semester_dtl($nis, $id_th_kelas, $id_semester);
+
+        //name 
+        $data['page'] = 'Nilai Semester Detail';
 
         $this->load->view('siswa/dashboard/index', $data);
     }

@@ -19,7 +19,9 @@
     <!-- Argon CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/argon.css?v=1.2.0" type="text/css">
     <!-- datatable -->
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
 </head>
 
 <body>
@@ -49,8 +51,10 @@
                 $this->load->view('siswa/content/table_list_matpel');
             } else if ($page == 'Nilai') {
                 $this->load->view('siswa/content/table_list_nilai');
-            } else if ($page == 'Nilai Detail') {
-                $this->load->view('siswa/content/table_list_nilai_detail');
+            } else if ($page == 'Nilai MID Detail') {
+                $this->load->view('siswa/content/table_list_nilai_mid_detail');
+            } else if ($page == 'Nilai Semester Detail') {
+                $this->load->view('siswa/content/table_list_nilai_semester_detail');
             }
             ?>
 

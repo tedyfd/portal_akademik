@@ -58,7 +58,7 @@ class Model_siswa extends CI_Model
         where siswa.nis ='$nis'";
         return $this->db->query($query)->result_array();
     }
-    function list_nilai($nis)
+    function list_nilai_mid($nis)
     {
         $query = "SELECT nis, th_ajaran.th_ajaran, kelas.kelas,semester.semester,matpel.matpel, th_kelas. id_th_kelas, semester.id_semester  from nilai_mid
         INNER JOIN semester ON nilai_mid.id_semester = semester.id_semester
@@ -73,7 +73,22 @@ class Model_siswa extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
-    function list_nilai_dtl($nis, $id_th_kelas, $id_semester)
+    function list_nilai_semester($nis)
+    {
+        $query = "SELECT nis, th_ajaran.th_ajaran, kelas.kelas,semester.semester,matpel.matpel, th_kelas. id_th_kelas, semester.id_semester  from nilai_semester
+        INNER JOIN semester ON nilai_semester.id_semester = semester.id_semester
+        INNER JOIN th_matpel ON nilai_semester.id_th_matpel = th_matpel.id_th_matpel
+        INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
+        INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
+        INNER JOIN kelas ON th_kelas.id_th_kelas = kelas.id_kelas
+        INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+        WHERE nilai_semester.nis='$nis'
+        GROUP by nilai_semester.nis, nilai_semester.id_semester, nilai_semester.id_th_matpel";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    function list_nilai_mid_dtl($nis, $id_th_kelas, $id_semester)
     {
         if ($id_semester == 1 || $id_semester == 3) {
 
@@ -85,6 +100,23 @@ class Model_siswa extends CI_Model
         INNER JOIN kelas ON th_kelas.id_th_kelas = kelas.id_kelas
         INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
         where nilai_mid.nis='$nis' and th_kelas.id_th_kelas = '$id_th_kelas' and semester.id_semester ='$id_semester'";
+        }
+
+        return $this->db->query($query)->result_array();
+    }
+
+    function list_nilai_semester_dtl($nis, $id_th_kelas, $id_semester)
+    {
+        if ($id_semester == 1 || $id_semester == 3) {
+
+            $query = "SELECT nis, th_ajaran.th_ajaran, kelas.kelas,semester.semester,matpel.matpel,th_kelas. id_th_kelas, semester.id_semester, nilai_semester.nilai_p, nilai_semester.nilai_k, nilai_semester.nilai_s from nilai_semester
+        INNER JOIN semester ON nilai_semester.id_semester = semester.id_semester
+        INNER JOIN th_matpel ON nilai_semester.id_th_matpel = th_matpel.id_th_matpel
+        INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
+        INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
+        INNER JOIN kelas ON th_kelas.id_th_kelas = kelas.id_kelas
+        INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+        where nilai_semester.nis='$nis' and th_kelas.id_th_kelas = '$id_th_kelas' and semester.id_semester ='$id_semester'";
         }
 
         return $this->db->query($query)->result_array();

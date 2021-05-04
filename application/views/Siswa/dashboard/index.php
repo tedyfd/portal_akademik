@@ -43,6 +43,8 @@
 
             if ($page == 'Dashboard') {
                 $this->load->view('siswa/content/dashboard');
+            } else if ($page == 'Ganti Password') {
+                $this->load->view('siswa/content/ganti_password');
             } else if ($page == 'Pengumuman') {
                 $this->load->view('siswa/content/pengumuman');
             } else if ($page == 'Detail Pengumuman') {
@@ -63,8 +65,8 @@
                 <div class="row align-items-center justify-content-lg-between">
                     <div class="col-lg-6">
                         <div class="copyright text-center  text-lg-left  text-muted">
-                            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
-                                target="_blank">Creative Tim</a>
+                            &copy; <?= date("Y") ?> <a href="https://www.uib.ac.id/" class="font-weight-bold ml-1"
+                                target="_blank">Universitas Internasional Batam</a>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -102,12 +104,34 @@
     <!-- sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <?php if ($this->session->userdata('status_login_siswa') == "sukses_siswa") : ?>
+
     <script src="<?= base_url('assets/js/siswa.js') ?>"></script>
-    <?php else : ?>
-    <script src="<?= base_url('assets/js/admin.js') ?>"></script>
-    <script src="<?= base_url('assets/js/admin2.js') ?>"></script>
-    <?php endif; ?>
+    <script>
+    $('.submit-btn').on('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Password akan diperbarui!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#ganti_password').submit();
+            }
+        })
+    });
+    const success = $('#flash-data').data('flashdata');
+    if (success) {
+        Swal.fire({
+            title: 'SUCCESS',
+            text: 'Data ' + success,
+            icon: 'success'
+        });
+    }
+    </script>
 </body>
 
 </html>

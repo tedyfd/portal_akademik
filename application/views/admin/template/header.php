@@ -37,13 +37,12 @@ $count_kelas = $this->db->query("SELECT count(id_kelas) AS count FROM kelas")->r
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                        <i class="ni ni-active-40"></i>
+                                        <i class="ni ni-chart-bar-32"></i>
                                     </div>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> </span>
-                                <span class="text-nowrap"></span>
+
                             </p>
                         </div>
                     </div>
@@ -61,13 +60,12 @@ $count_kelas = $this->db->query("SELECT count(id_kelas) AS count FROM kelas")->r
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                                        <i class="ni ni-chart-pie-35"></i>
+                                        <i class="ni ni-chart-bar-32"></i>
                                     </div>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> </span>
-                                <span class="text-nowrap"></span>
+
                             </p>
                         </div>
                     </div>
@@ -85,13 +83,12 @@ $count_kelas = $this->db->query("SELECT count(id_kelas) AS count FROM kelas")->r
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                        <i class="ni ni-money-coins"></i>
+                                        <i class="ni ni-chart-bar-32"></i>
                                     </div>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> </span>
-                                <span class="text-nowrap"></span>
+
                             </p>
                         </div>
                     </div>
@@ -112,8 +109,7 @@ $count_kelas = $this->db->query("SELECT count(id_kelas) AS count FROM kelas")->r
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> </span>
-                                <span class="text-nowrap"></span>
+
                             </p>
                         </div>
                     </div>

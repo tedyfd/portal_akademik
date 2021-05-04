@@ -38,13 +38,13 @@
                                 <div class="dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">Welcome!</h6>
                                 </div>
-                                <a href="<?= base_url('admin/profile/') ?>" class="dropdown-item">
+                                <a href="<?= base_url('siswa/profile/') ?>" class="dropdown-item">
                                     <i class="ni ni-single-02"></i>
                                     <span>My profile</span>
                                 </a>
-                                <a href="<?= base_url('admin/setting') ?>" class="dropdown-item">
+                                <a href="<?= base_url('siswa/ganti_password') ?>" class="dropdown-item">
                                     <i class="ni ni-settings-gear-65"></i>
-                                    <span>Settings</span>
+                                    <span>Ganti Password</span>
                                 </a>
 
                                 <div class="dropdown-divider"></div>

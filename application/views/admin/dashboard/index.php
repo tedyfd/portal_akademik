@@ -41,7 +41,7 @@
             <!-- content -->
             <?php
 
-            if ($page == 'Raport (semua jenis)') {
+            if ($page == 'Dashboard') {
                 $this->load->view('admin/content/dashboard');
             } else if ($page == 'Raport Mid') {
                 $this->load->view('admin/content/table_mid');
@@ -103,8 +103,8 @@
                 <div class="row align-items-center justify-content-lg-between">
                     <div class="col-lg-6">
                         <div class="copyright text-center  text-lg-left  text-muted">
-                            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
-                                target="_blank">Creative Tim</a>
+                            &copy; <?= date("Y") ?> <a href="https://www.uib.ac.id/" class="font-weight-bold ml-1"
+                                target="_blank">Universitas Internasional Batam</a>
                         </div>
                     </div>
                     <div class="col-lg-6">

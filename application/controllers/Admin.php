@@ -24,7 +24,7 @@ class Admin extends CI_Controller
         $data['mid'] = $this->Model_raport->mid();
 
         //name 
-        $data['page'] = 'Raport (semua jenis)';
+        $data['page'] = 'Dashboard';
         $data['profile'] = 'smp';
 
         $this->load->view('admin/dashboard/index', $data);

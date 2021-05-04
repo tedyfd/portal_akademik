@@ -25,6 +25,51 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/dashboard/index', $data);
     }
 
+    public function ganti_password()
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Ganti Password';
+
+        // //model
+
+        //name 
+        $data['page'] = 'Ganti Password';
+
+        $this->form_validation->set_rules('password', 'Password Lama', 'required|trim');
+        $this->form_validation->set_rules('password1', 'Password Baru', 'required|trim|matches[password2]');
+        $this->form_validation->set_rules('password2', 'Ulangi', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('siswa/dashboard/index', $data);
+        } else {
+            $this->_new_password();
+        }
+    }
+
+    private function _new_password()
+    {
+        $username = $this->session->userdata('username');
+        $password = $this->input->post('password');
+        $password1 = $this->input->post('password1');
+        $password2 = $this->input->post('password2');
+
+        $cek = $this->db->get_where('siswa', array('nis' => $username, 'password' => $password))->row_array();
+        if ($cek) {
+            $data = array(
+                'password' => $password1,
+            );
+            $this->db->where('nis', $username);
+            $this->db->update('siswa', $data);
+
+            $this->session->set_flashdata('message', 'Password telah perbarui');
+            redirect('siswa');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Password anda salah</div>');
+            redirect('siswa/ganti_password');
+        }
+    }
+
     public function pengumuman()
     {
         $data['title'] = 'Pengumuman';

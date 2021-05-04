@@ -18,7 +18,7 @@ class Siswa extends CI_Controller
         $data['title'] = 'Dashboard';
 
         // //model
-
+        $data['profile'] = $this->db->get_where('siswa', array('nis' => $this->session->userdata('username')))->row_array();
         //name 
         $data['page'] = 'Dashboard';
 

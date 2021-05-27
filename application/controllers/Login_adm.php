@@ -27,17 +27,23 @@ class Login_adm extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $user = $this->db->get_where('admin', ['username' => $username, 'password' => $password])->row_array();
+        // $user = $this->db->get_where('admin', ['username' => $username, 'password' => $password])->row_array();
+        $user = $this->db->get_where('admin', ['username' => $username])->row_array();
 
         if ($user) {
-            $data = [
-                'status_login_adm' => 'sukses_adm',
-                'username' => $user['username'],
-            ];
-            $this->session->set_userdata($data);
-            redirect('admin');
+            if (password_verify($password, $user['password'])) {
+                $data = [
+                    'status_login_adm' => 'sukses_adm',
+                    'username' => $user['username'],
+                ];
+                $this->session->set_userdata($data);
+                redirect('admin');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Password anda salah!</div>');
+                redirect('Login_adm');
+            }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Username atau Password anda salah</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Username tidak ditemukan!</div>');
             redirect('Login_adm');
         }
     }

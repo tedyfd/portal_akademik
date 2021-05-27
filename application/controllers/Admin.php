@@ -30,6 +30,49 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
     }
 
+    public function setting()
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Setting';
+
+        //model
+        $data['mid'] = $this->Model_raport->mid();
+
+        //name 
+        $data['page'] = 'Setting';
+        $data['profile'] = 'smp';
+
+        $this->form_validation->set_rules('old_psswd', 'Password Lama', 'required|trim');
+        $this->form_validation->set_rules('psswd1', 'Password Baru', 'required|trim');
+        $this->form_validation->set_rules('psswd2', 'Konfirmasi Password', 'required|trim|matches[psswd1]');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_change_psswd();
+        }
+    }
+
+    private function _change_psswd()
+    {
+        $old_psswd = $this->input->post('old_psswd');
+        $psswd = $this->input->post('psswd1');
+
+        $user = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        if (password_verify($old_psswd, $user['password'])) {
+            $data = array(
+                'password' => password_hash($psswd, PASSWORD_DEFAULT),
+            );
+            $this->db->where('username', $this->session->userdata('username'));
+            $this->db->update('admin', $data);
+            $this->session->set_flashdata('message', 'Password Berhasil diubah!');
+            redirect('admin/setting');
+        } else {
+            $this->session->set_flashdata('err', '<div class="alert alert-danger text-center" role="alert">Password lama anda salah!</div>');
+            redirect('admin/setting');
+        }
+    }
+
     public function import_mid()
     {
         $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
@@ -528,11 +571,26 @@ class Admin extends CI_Controller
         $link = str_replace(' ', '', $this->input->post('title'));
         $created = date("d-m-Y");
 
+        $pdf = $_FILES['pdf'];
+        if ($pdf) {
+            $config['upload_path'] = './assets/pdf';
+            $config['allowed_types'] = 'pdf';
+            $config['file_name'] = $created . "-" . rand(1000, 9999);
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('pdf')) {
+                echo "upload gagal";
+                die();
+            } else {
+                $pdf = $this->upload->data('file_name');
+            }
+        }
         $data = array(
             'title' => $title,
             'pengumuman' => $content,
             'link' => $link,
             'created' => $created,
+            'pdf' => $pdf
         );
         $this->db->insert('pengumuman', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');

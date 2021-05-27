@@ -11,7 +11,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST" action="<?= base_url('admin/pengumuman_add') ?>" id="form">
+                <form method="POST" action="<?= base_url('admin/pengumuman_add') ?>" id="form"
+                    enctype="multipart/form-data">
                     <h6 class="heading-small text-muted mb-4">Pengumuman</h6>
                     <div class="pl-lg-4">
                         <div class="row">
@@ -24,7 +25,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -35,13 +35,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="pdf" id="pdf" required>
+                                    <label class="custom-file-label" for="id">Choose file...</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4">
                                 <button class="col btn btn-lg btn-primary submit-btn">Submit</button>
                             </div>
                         </div>
+
                     </div>
-                    <hr class="my-4" />
                 </form>
             </div>
         </div>

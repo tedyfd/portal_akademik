@@ -43,6 +43,8 @@
 
             if ($page == 'Dashboard') {
                 $this->load->view('admin/content/dashboard');
+            } else if ($page == 'Setting') {
+                $this->load->view('admin/content/setting');
             } else if ($page == 'Raport Mid') {
                 $this->load->view('admin/content/table_mid');
             } else if ($page == 'Raport Mid Edit') {

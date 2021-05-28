@@ -10,9 +10,13 @@ class Model_admin extends CI_Model
             return $this->db->get('siswa')->result_array();
         }
     }
-    function list_pengumuman()
+    function list_pengumuman($id = null)
     {
-        return $this->db->query('SELECT * FROM pengumuman ORDER BY id DESC')->result_array();
+        if ($id) {
+            return $this->db->get_where('pengumuman', ['id' => $id])->row_array();
+        } else {
+            return $this->db->query('SELECT * FROM pengumuman ORDER BY id DESC')->result_array();
+        }
     }
 
     function list_ta()

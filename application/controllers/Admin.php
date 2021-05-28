@@ -538,6 +538,11 @@ class Admin extends CI_Controller
 
     public function pengumuman_del($id)
     {
+        $pengumuman = $this->Model_admin->list_pengumuman($id);
+        if ($pengumuman['pdf']) {
+            $path = "./assets/pdf/" . $pengumuman['pdf'];
+            unlink($path);
+        }
         $this->db->delete('pengumuman', array('id' => $id));
         $this->session->set_flashdata('message', 'telah dihapus!');
         redirect('admin/pengumuman');

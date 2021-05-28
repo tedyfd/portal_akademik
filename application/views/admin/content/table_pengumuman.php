@@ -22,6 +22,7 @@
                             <th scope="col" class="sort" data-sort="name">No</th>
                             <th scope="col" class="sort" data-sort="budget">Judul</th>
                             <th scope="col" class="sort" data-sort="status">Isi</th>
+                            <th scope="col" class="sort" data-sort="status">PDF</th>
                             <th scope="col">Tanggal Input</th>
                             <th scope="col" class="sort" data-sort="completion">Aksi</th>
                         </tr>
@@ -33,6 +34,7 @@
                             <td><?= $n++; ?></td>
                             <td><?= $l['title'] ?></td>
                             <td><?= $l['pengumuman'] ?></td>
+                            <td><a href="<?= base_url('assets/pdf/') . $l['pdf'] ?>"><?= $l['pdf'] ?></a></td>
                             <td><?= $l['created'] ?></td>
                             <td><a href="<?= base_url('admin/pengumuman_del/') . $l['id'] ?>"
                                     class="btn btn-danger delete-btn-conf">Delete</a></td>

@@ -38,8 +38,8 @@
                         <tr>
                             <td><?= $n++; ?></td>
                             <td><?= $row['nis'] ?></td>
-                            <td><?= $row['id_semester'] ?></td>
-                            <td><?= $row['id_th_matpel'] ?></td>
+                            <td><?= $row['semester'] ?></td>
+                            <td><?= $row['th_ajaran'] . ' - ' . $row['kelas'] . ' - ' . $row['matpel'] ?></td>
                             <td><?= $row['nilai_p'] ?></td>
                             <td><?= $row['nilai_k'] ?></td>
                             <td><?= $row['nilai_mid'] ?></td>

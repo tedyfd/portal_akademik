@@ -119,9 +119,24 @@ class Model_admin extends CI_Model
     function mid($id = null)
     {
         if ($id) {
-            return $this->db->get_where('nilai_mid', ['id' => $id])->row_array();
+            $query = "SELECT nilai_mid.*, semester.semester, matpel.matpel, kelas.kelas, th_ajaran.th_ajaran FROM nilai_mid
+            INNER JOIN semester ON nilai_mid.id_semester = semester.id_semester
+            INNER JOIN th_matpel ON nilai_mid.id_th_matpel = th_matpel.id_th_matpel
+            INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
+            INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
+            INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
+            INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+            WHERE nilai_mid.id = '$id'
+            ";
+            return $this->db->query($query)->row_array();
         } else {
-            $query = "SELECT * FROM nilai_mid";
+            $query = "SELECT nilai_mid.*, semester.semester, matpel.matpel, kelas.kelas, th_ajaran.th_ajaran FROM nilai_mid
+            INNER JOIN semester ON nilai_mid.id_semester = semester.id_semester
+            INNER JOIN th_matpel ON nilai_mid.id_th_matpel = th_matpel.id_th_matpel
+            INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
+            INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
+            INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
+            INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th";
             return $this->db->query($query)->result_array();
         }
     }
@@ -131,7 +146,13 @@ class Model_admin extends CI_Model
         if ($id) {
             return $this->db->get_where('nilai_semester', ['id' => $id])->row_array();
         } else {
-            $query = "SELECT * FROM nilai_semester";
+            $query = "SELECT nilai_semester.*, semester.semester, matpel.matpel, kelas.kelas, th_ajaran.th_ajaran FROM nilai_semester
+            INNER JOIN semester ON nilai_semester.id_semester = semester.id_semester
+            INNER JOIN th_matpel ON nilai_semester.id_th_matpel = th_matpel.id_th_matpel
+            INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
+            INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
+            INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
+            INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th";
             return $this->db->query($query)->result_array();
         }
     }

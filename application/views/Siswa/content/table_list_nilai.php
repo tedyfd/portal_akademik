@@ -27,7 +27,7 @@
                             <td>
                                 <a
                                     href="<?= base_url('siswa/nilai_mid_dtl/') . $row['id_th_kelas'] . "/" . $row['id_semester'] ?>">
-                                    <?= "(" . $row['th_ajaran'] . ") " . $row['kelas'] . " - " . $row['semester'] . " - " . $row['matpel'] . "" ?>
+                                    <?= "(" . $row['th_ajaran'] . ") " . $row['kelas'] . " - " . $row['semester'] ?>
                                 </a>
                             </td>
                         </tr>
@@ -73,7 +73,7 @@
                             <td>
                                 <a
                                     href="<?= base_url('siswa/nilai_semester_dtl/') . $row['id_th_kelas'] . "/" . $row['id_semester'] ?>">
-                                    <?= "(" . $row['th_ajaran'] . ") " . $row['kelas'] . " - " . $row['semester'] . " - " . $row['matpel'] . "" ?>
+                                    <?= "(" . $row['th_ajaran'] . ") " . $row['kelas'] . " - " . $row['semester'] ?>
                                 </a>
                             </td>
                         </tr>

@@ -65,10 +65,10 @@ class Model_siswa extends CI_Model
         INNER JOIN th_matpel ON nilai_mid.id_th_matpel = th_matpel.id_th_matpel
         INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
         INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
-        INNER JOIN kelas ON th_kelas.id_th_kelas = kelas.id_kelas
+        INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
         INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
         WHERE nilai_mid.nis='$nis'
-        GROUP by nilai_mid.nis, nilai_mid.id_semester, nilai_mid.id_th_matpel";
+        GROUP by nilai_mid.nis, nilai_mid.id_semester";
 
         return $this->db->query($query)->result_array();
     }
@@ -80,10 +80,10 @@ class Model_siswa extends CI_Model
         INNER JOIN th_matpel ON nilai_semester.id_th_matpel = th_matpel.id_th_matpel
         INNER JOIN matpel ON th_matpel.id_matpel = matpel.id_matpel
         INNER JOIN th_kelas ON th_matpel.id_th_kelas = th_kelas.id_th_kelas
-        INNER JOIN kelas ON th_kelas.id_th_kelas = kelas.id_kelas
+        INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
         INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
         WHERE nilai_semester.nis='$nis'
-        GROUP by nilai_semester.nis, nilai_semester.id_semester, nilai_semester.id_th_matpel";
+        GROUP by nilai_semester.nis, nilai_semester.id_semester";
 
         return $this->db->query($query)->result_array();
     }

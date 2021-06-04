@@ -34,18 +34,16 @@ $th = $this->db->get('th_ajaran')->result_array();
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="kelas">Kelas</label>
-                                    <select name="kelas" id="kelas" class="form-control">
-                                        <option value=""></option>
-                                        <?php foreach ($kelas as $l) : ?>
-                                        <option value="<?= $l['id_kelas'] ?>"><?= $l['kelas'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <?= form_error('kelas', '<small class="text-danger pl-3">', '</small>'); ?>
+                            <?php foreach ($kelas as $l) : ?>
+                            <div class="col col-md-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="kelas" name="kelas[]"
+                                        value="<?= $l['id_kelas'] ?>">
+                                    <label class="form-check-label" for="exampleCheck1"><?= $l['kelas'] ?></label>
                                 </div>
                             </div>
+                            <?php endforeach; ?>
+                            <?= form_error('kelas[]', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                         <div class="row">
                             <div class="col-md-12">

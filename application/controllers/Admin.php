@@ -846,7 +846,7 @@ class Admin extends CI_Controller
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('ta', 'Tahun Ajaran', 'required|trim');
-        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+        $this->form_validation->set_rules('kelas[]', 'Kelas', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Tambah Kelas Tahun Ajaran';
@@ -866,13 +866,21 @@ class Admin extends CI_Controller
     private function _kelas_ta_add()
     {
         $th = $this->input->post('ta');
-        $kelas = $this->input->post('kelas');
 
-        $data = array(
-            'id_th' => $th,
-            'id_kelas' => $kelas,
-        );
-        $this->db->insert('th_kelas', $data);
+        $for_query = '';
+        foreach ($this->input->post('kelas') as $language) {
+            $for_query .= $language . ',';
+        }
+        $hari = substr($for_query, 0, -1);
+
+        $myArray = explode(',', $hari);
+        foreach ($myArray as $row) {
+            $data[] = array(
+                'id_th' => $th,
+                'id_kelas' => $row[0],
+            );
+        }
+        $this->db->insert_batch('th_kelas', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');
         redirect('admin/kelas_ta');
     }
@@ -964,7 +972,7 @@ class Admin extends CI_Controller
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('ta_kelas', 'Kelas Tahun Ajaran', 'required|trim');
-        $this->form_validation->set_rules('matpel', 'Kelas', 'required|trim');
+        $this->form_validation->set_rules('matpel[]', 'Kelas', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Tambah Matpel Tahun Ajaran';
@@ -983,14 +991,22 @@ class Admin extends CI_Controller
 
     private function _matpel_ta_add()
     {
-        $th_kelas = $this->input->post('ta_kelas');
-        $matpel = $this->input->post('matpel');
+        $th_kelas =  $this->input->post('ta_kelas');
 
-        $data = array(
-            'id_th_kelas' => $th_kelas,
-            'id_matpel' => $matpel,
-        );
-        $this->db->insert('th_matpel', $data);
+        $for_query = '';
+        foreach ($this->input->post('matpel') as $language) {
+            $for_query .= $language . ',';
+        }
+        $hari = substr($for_query, 0, -1);
+
+        $myArray = explode(',', $hari);
+        foreach ($myArray as $row) {
+            $data[] = array(
+                'id_th_kelas' => "$th_kelas",
+                'id_matpel' => $row[0],
+            );
+        }
+        $this->db->insert_batch('th_matpel', $data);
         $this->session->set_flashdata('message', 'telah ditambahkan');
         redirect('admin/matpel_ta');
     }

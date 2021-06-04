@@ -41,18 +41,19 @@ $matpel = $this->db->get('matpel')->result_array();
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="matpel">Matapelajaran</label>
-                                    <select name="matpel" id="matpel" class="form-control">
-                                        <option value=""></option>
-                                        <?php foreach ($matpel as $l) : ?>
-                                        <option value="<?= $l['id_matpel'] ?>"><?= $l['matpel'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <?= form_error('matpel', '<small class="text-danger pl-3">', '</small>'); ?>
+                            <div class="col col-md-12">
+                                <label class="form-control-label" for="matpel">Matapelajaran</label>
+                            </div>
+                            <?php foreach ($matpel as $l) : ?>
+                            <div class="col col-md-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="matpel<?= $l['id_matpel'] ?>"
+                                        name="matpel[]" value="<?= $l['id_matpel'] ?>">
+                                    <label class="form-check-label"
+                                        for="matpel<?= $l['id_matpel'] ?>"><?= $l['matpel'] ?></label>
                                 </div>
                             </div>
+                            <?php endforeach; ?>
                         </div>
                         <div class="row">
                             <div class="col-md-12">

@@ -10,8 +10,14 @@
                     <?= $list_pengumuman['pengumuman'] ?>
                 </p>
                 <p>
-                    <a
-                        href="<?= base_url('assets/pdf/') . $list_pengumuman['pdf'] ?>"><?= $list_pengumuman['pdf'] ?></a>
+                    <?php if ($list_pengumuman['pdf']) : ?>
+                    <span class="badge badge-primary">
+                        <a class="text-primary"
+                            href="<?= base_url('assets/pdf/') . $list_pengumuman['pdf'] ?>"><?= $list_pengumuman['pdf'] ?></a>
+                        <i class="far fa-file-pdf"></i>
+                    </span>
+                    <?php else : ?>
+                    <?php endif; ?>
                 </p>
             </div>
             <div class="card-footer py-4">

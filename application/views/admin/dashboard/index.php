@@ -57,6 +57,12 @@
                 $this->load->view('admin/content/table_siswa');
             } else if ($page == 'Data Siswa Edit') {
                 $this->load->view('admin/content/edit/siswa_edit');
+            } else if ($page == 'Data Siswa Kelas') {
+                $this->load->view('admin/content/table_siswa_kelas');
+            } else if ($page == 'Siswa Kelas add') {
+                $this->load->view('admin/content/table_siswa_kelas_add');
+            } else if ($page == 'Siswa Kelas edit') {
+                $this->load->view('admin/content/edit/siswa_kelas_edit');
             } else if ($page == 'Pengumuman') {
                 $this->load->view('admin/content/table_pengumuman');
             } else if ($page == 'Pengumuman_add') {

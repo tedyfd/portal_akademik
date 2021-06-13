@@ -494,6 +494,102 @@ class Admin extends CI_Controller
         redirect('admin/siswa');
     }
 
+    public function siswa_kelas()
+    {
+        $data['title'] = 'Data Siswa';
+
+        //model
+        $data['siswa_kelas'] = $this->Model_admin->list_siswa_kelas();
+
+        //name 
+        $data['page'] = 'Data Siswa Kelas';
+        $data['profile'] = 'smp';
+        $data['modal'] = 'siswa';
+
+        $this->load->view('admin/dashboard/index', $data);
+    }
+
+    public function siswa_kelas_del($id)
+    {
+        $this->db->delete('th_kelas_siswa', array('id_th_kelas_siswa' => $id));
+        $this->session->set_flashdata('message', 'telah dihapus!');
+        redirect('admin/siswa_kelas');
+    }
+
+    public function siswa_kelas_add()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('kelas_ta', 'Kelas', 'required|trim');
+        $this->form_validation->set_rules('siswa[]', 'Siswa', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Tambah Siswa Kelas';
+
+            //model
+
+            //name 
+            $data['page'] = 'Siswa Kelas add';
+            $data['profile'] = 'smp';
+
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $this->_siswa_kelas_add();
+        }
+    }
+
+    private function _siswa_kelas_add()
+    {
+        $kelas_ta = $this->input->post('kelas_ta');
+
+        $for_query = '';
+        foreach ($this->input->post('siswa') as $language) {
+            $for_query .= $language . ',';
+        }
+        $siswa = substr($for_query, 0, -1);
+
+        $myArray = explode(',', $siswa);
+        foreach ($myArray as $row) {
+            $data[] = array(
+                'id_th_kelas' => "$kelas_ta",
+                'nis' => "$row",
+            );
+        }
+        $this->db->insert_batch('th_kelas_siswa', $data);
+        $this->session->set_flashdata('message', 'telah ditambahkan');
+        redirect('admin/siswa_kelas');
+    }
+
+    public function siswa_kelas_edit($id)
+    {
+        $this->load->library('form_validation');
+
+        $data['title'] = 'Jadwal';
+
+        //model
+        $data['siswa_kelas'] = $this->Model_admin->list_siswa_kelas($id);
+        $data['list_kelas_ta'] = $this->Model_admin->list_kelas_ta();
+        $data['list_siswa'] = $this->Model_admin->list_siswa();
+
+        //name 
+        $data['page'] = 'Siswa Kelas edit';
+        $data['profile'] = 'smp';
+
+        $this->form_validation->set_rules('ta_kelas', 'Kelas berdasarkan Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('siswa', 'Matapelajaran', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/dashboard/index', $data);
+        } else {
+            $data = array(
+                'id_th_kelas' => $this->input->post('ta_kelas'),
+                'nis' => $this->input->post('siswa'),
+            );
+            $this->db->where('id_th_kelas_siswa', $this->input->post('id'));
+            $this->db->update('th_kelas_siswa', $data);
+            $this->session->set_flashdata('message', 'telah diubah');
+            redirect('admin/siswa_kelas');
+        }
+    }
+
     public function kkm()
     {
         $data['title'] = 'Data KKM';

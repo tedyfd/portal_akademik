@@ -10,6 +10,28 @@ class Model_admin extends CI_Model
             return $this->db->get('siswa')->result_array();
         }
     }
+
+    function list_siswa_kelas($id = null)
+    {
+        if ($id) {
+            $query = "SELECT th_siswa.id_th_kelas_siswa, th_siswa.id_th_kelas, siswa.nis, siswa.nama, th_ajaran.th_ajaran,kelas.kelas FROM th_kelas_siswa AS th_siswa
+            INNER JOIN siswa ON th_siswa.nis = siswa.nis
+            INNER JOIN th_kelas ON th_siswa.id_th_kelas = th_kelas.id_th_kelas
+            INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+            INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas
+            WHERE th_siswa.id_th_kelas_siswa = $id
+            ";
+            return $this->db->query($query)->row_array();
+        } else {
+            $query = "SELECT th_siswa.id_th_kelas_siswa, siswa.nis, siswa.nama, th_ajaran.th_ajaran,kelas.kelas FROM th_kelas_siswa AS th_siswa
+            INNER JOIN siswa ON th_siswa.nis = siswa.nis
+            INNER JOIN th_kelas ON th_siswa.id_th_kelas = th_kelas.id_th_kelas
+            INNER JOIN th_ajaran ON th_kelas.id_th = th_ajaran.id_th
+            INNER JOIN kelas ON th_kelas.id_kelas = kelas.id_kelas";
+            return $this->db->query($query)->result_array();
+        }
+    }
+
     function list_pengumuman($id = null)
     {
         if ($id) {

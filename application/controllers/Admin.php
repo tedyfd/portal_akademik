@@ -973,7 +973,7 @@ class Admin extends CI_Controller
         foreach ($myArray as $row) {
             $data[] = array(
                 'id_th' => $th,
-                'id_kelas' => $row[0],
+                'id_kelas' => $row,
             );
         }
         $this->db->insert_batch('th_kelas', $data);
@@ -1099,7 +1099,7 @@ class Admin extends CI_Controller
         foreach ($myArray as $row) {
             $data[] = array(
                 'id_th_kelas' => "$th_kelas",
-                'id_matpel' => $row[0],
+                'id_matpel' => $row,
             );
         }
         $this->db->insert_batch('th_matpel', $data);
@@ -1226,7 +1226,7 @@ class Admin extends CI_Controller
         foreach ($myArray as $row) {
             $data[] = array(
                 'id_th_matpel' => "$matpel_ta",
-                'id_hari' => $row[0],
+                'id_hari' => $row,
             );
         }
         $this->db->insert_batch('jadwal', $data);

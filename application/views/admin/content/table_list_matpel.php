@@ -17,10 +17,10 @@
                 <table id="tabel1" class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th class="sort">No</th>
-                            <th class="sort">ID</th>
-                            <th class="sort">Nama Matpel</th>
-                            <th colspan="2" class="sort">Aksi</th>
+                            <th>No</th>
+                            <th>ID</th>
+                            <th>Nama Matpel</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -39,8 +39,6 @@
                             <td>
                                 <a class="btn btn-primary"
                                     href="<?= base_url('admin/matpel_edit/') . $row['id_matpel'] ?>">Edit</a>
-                            </td>
-                            <td>
                                 <a class="btn btn-danger delete-btn-conf"
                                     href="<?= base_url('admin/matpel_del/') . $row['id_matpel'] ?>">Delete</a>
                             </td>

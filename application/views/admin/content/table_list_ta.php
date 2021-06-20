@@ -17,10 +17,10 @@
                 <table id="tabel1" class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th class="sort">No</th>
-                            <th class="sort">ID</th>
-                            <th class="sort">Tahun Ajaran</th>
-                            <th colspan="2">Aksi</th>
+                            <th>No</th>
+                            <th>ID</th>
+                            <th>Tahun Ajaran</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -36,10 +36,12 @@
                             <td class="budget">
                                 <?= $l['th_ajaran'] ?>
                             </td>
-                            <td><a class="btn btn-primary"
-                                    href="<?= base_url('admin/ta_edit/') . $l['id_th'] ?>">Edit</a></td>
-                            <td><a class="btn btn-danger delete-btn-conf"
-                                    href="<?= base_url('admin/ta_del/') . $l['id_th'] ?>">Delete</a></td>
+                            <td>
+                                <a class="btn btn-primary"
+                                    href="<?= base_url('admin/ta_edit/') . $l['id_th'] ?>">Edit</a>
+                                <a class="btn btn-danger delete-btn-conf"
+                                    href="<?= base_url('admin/ta_del/') . $l['id_th'] ?>">Delete</a>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -29,7 +29,7 @@
                             <th class="sort" data-sort="status">NIS (Username)</th>
                             <th>Passowrd</th>
                             <th class="sort" data-sort="completion">Nama</th>
-                            <th colspan="2">Aksi</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -51,10 +51,11 @@
                             <td>
                                 <?= $m['nama'] ?>
                             </td>
-                            <td><a class="btn btn-primary"
+                            <td>
+                                <a class="btn btn-primary"
                                     href="<?= base_url('admin/siswa_edit/') . $m['id'] ?>">Edit</a>
-                            </td>
-                            <td><a class="btn btn-danger delete-btn-conf"
+
+                                <a class="btn btn-danger delete-btn-conf"
                                     href="<?= base_url('admin/delete_siswa/') . $m['id'] ?>">Delete</a>
                             </td>
                         </tr>

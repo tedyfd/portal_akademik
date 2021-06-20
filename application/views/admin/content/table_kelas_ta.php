@@ -23,10 +23,10 @@
                 <table id="tabel1" class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th class="sort">No</th>
-                            <th class="sort">Tahun Ajaran</th>
-                            <th class="sort">Kelas</th>
-                            <th colspan="2" class="sort">Aksi</th>
+                            <th>No</th>
+                            <th>Tahun Ajaran</th>
+                            <th>Kelas</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -36,10 +36,12 @@
                             <td><?= $n++; ?></td>
                             <td><?= $l['th_ajaran'] ?></td>
                             <td><?= $l['kelas'] ?></td>
-                            <td><a href="<?= base_url('admin/kelas_ta_edit/') . $l['id_th_kelas'] ?>"
-                                    class="btn btn-primary">Edit</a></td>
-                            <td><a href="<?= base_url('admin/kelas_ta_del/') . $l['id_th_kelas'] ?>"
-                                    class="btn btn-danger delete-btn-conf">Delete</a></td>
+                            <td>
+                                <a href="<?= base_url('admin/kelas_ta_edit/') . $l['id_th_kelas'] ?>"
+                                    class="btn btn-primary">Edit</a>
+                                <a href="<?= base_url('admin/kelas_ta_del/') . $l['id_th_kelas'] ?>"
+                                    class="btn btn-danger delete-btn-conf">Delete</a>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

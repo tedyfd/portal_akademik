@@ -19,13 +19,13 @@
                 <table id="tabel1" class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th class="sort" data-sort="name">No</th>
-                            <th class="sort" data-sort="budget">Tahun Ajaran</th>
-                            <th class="sort" data-sort="status">Kelas</th>
-                            <th class="sort" data-sort="status">Mata Pelajaran</th>
-                            <th class="sort" data-sort="status">Hari</th>
-                            <th class="sort" data-sort="completion">Aksi</th>
-                            <th class="sort" colspan="2">Aksi</th>
+                            <th>No</th>
+                            <th>Tahun Ajaran</th>
+                            <th>Kelas</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Hari</th>
+                            <th>Aksi</th>
+
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -37,10 +37,12 @@
                             <td><?= $l['kelas'] ?></td>
                             <td><?= $l['matpel'] ?></td>
                             <td><?= $l['hari'] ?></td>
-                            <td><a href="<?= base_url('admin/jadwal_matpel_edit/') . $l['id_jadwal'] ?>"
-                                    class="btn btn-primary ">Edit</a></td>
-                            <td><a href="<?= base_url('admin/jadwal_del/') . $l['id_jadwal'] ?>"
-                                    class="btn btn-danger delete-btn-conf">Delete</a></td>
+                            <td>
+                                <a href="<?= base_url('admin/jadwal_matpel_edit/') . $l['id_jadwal'] ?>"
+                                    class="btn btn-primary ">Edit</a>
+                                <a href="<?= base_url('admin/jadwal_del/') . $l['id_jadwal'] ?>"
+                                    class="btn btn-danger delete-btn-conf">Delete</a>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

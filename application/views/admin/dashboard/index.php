@@ -365,6 +365,24 @@
         })
     });
 
+    $('.reset-btn-conf').on('click', function(e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        Swal.fire({
+            title: 'Reset password ?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Reset'
+        }).then((result) => {
+            if (result.value == true) {
+                document.location.href = href;
+            }
+        })
+    });
+
     $("#raport_semester_edit_btn").on('click', function() {
         let id = $(this).data('id');
         let nis = $(this).data('nis');

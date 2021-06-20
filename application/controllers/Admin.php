@@ -494,6 +494,18 @@ class Admin extends CI_Controller
         redirect('admin/siswa');
     }
 
+    public function reset_siswa($id)
+    {
+        $reset = rand(100000, 999999);
+        $data = array(
+            'password' => $reset,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('siswa', $data);
+        $this->session->set_flashdata('message', "password adalah $reset");
+        redirect('admin/siswa');
+    }
+
     public function siswa_kelas()
     {
         $data['title'] = 'Data Siswa';

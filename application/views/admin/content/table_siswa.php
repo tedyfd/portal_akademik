@@ -24,11 +24,11 @@
                 <table id="tabel1" class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th class="sort" data-sort="name">No</th>
-                            <th class="sort" data-sort="budget">NISN</th>
-                            <th class="sort" data-sort="status">NIS (Username)</th>
+                            <th>No</th>
+                            <th>NISN</th>
+                            <th>NIS (Username)</th>
+                            <th>Nama</th>
                             <th>Passowrd</th>
-                            <th class="sort" data-sort="completion">Nama</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -46,10 +46,11 @@
                                 <?= $m['nis'] ?>
                             </td>
                             <td>
-                                <?= $m['password'] ?>
+                                <?= $m['nama'] ?>
                             </td>
                             <td>
-                                <?= $m['nama'] ?>
+                                <a class="btn btn-warning reset-btn-conf"
+                                    href="<?= base_url('admin/reset_siswa/') . $m['id'] ?>">Reset</a>
                             </td>
                             <td>
                                 <a class="btn btn-primary"
